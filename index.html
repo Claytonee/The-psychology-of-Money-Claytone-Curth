@@ -1,0 +1,924 @@
+<!doctype html>
+<!--
+  ELEVENLABS API SETUP INSTRUCTIONS:
+  1. Sign up for an account at https://elevenlabs.io/
+  2. Get your API key from the account settings
+  3. Replace "sk_58a22deb6df235deea7b1716f8a7a36b39f2c1dba0cd1f58" in the JavaScript code with your actual API key
+-->
+<html lang="sw" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Psychology of Money – Tafsiri ya Sura kwa Sura (SW)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Playfair+Display:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@400;600;700&family=Nunito:wght@400;600;800&family=Poppins:wght@400;600;800&family=Roboto+Slab:wght@400;700&family=Literata:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef7fc',
+              100: '#d7eef9',
+              200: '#b0dcf1',
+              300: '#86c7e7',
+              400: '#52adde',
+              500: '#2b98cf',
+              600: '#1e79ac',
+              700: '#145d89',
+              800: '#0c4368',
+              900: '#073252',
+              950: '#032339'
+            },
+            deep: '#02387a',
+            accent: '#2b98cf'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'ui-sans-serif', 'Segoe UI', 'Arial'],
+            serif: ['Merriweather', 'Georgia', 'ui-serif'],
+            display: ['Playfair Display', 'Merriweather', 'serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular'],
+            lora: ['Lora','serif'],
+            sourceSerif: ['Source Serif Pro','serif'],
+            nunito: ['Nunito','Inter','system-ui'],
+            poppins: ['Poppins','Inter','system-ui'],
+            rslab: ['Roboto Slab','serif'],
+            literata: ['Literata','serif']
+          },
+          boxShadow: {
+            soft: '0 10px 30px -12px rgba(2,56,122,0.25)'
+          }
+        }
+      },
+      darkMode: 'class'
+    }
+  </script>
+  <style>
+    :root{
+      --page-bg: 255 255 255;
+      --ink: 15 23 42; /* slate-900 */
+      --muted: 71 85 105; /* slate-600 */
+      --accent: 43 152 207; /* brand-500 */
+      --hit-bg: 251 191 36; /* amber-400 */
+    }
+    .theme-sepia{ --page-bg: 250 247 239; --ink: 41 37 36; --muted: 87 83 78; --accent: 2 56 122; --hit-bg: 245 158 11; }
+    .theme-night{ --page-bg: 13 18 28; --ink: 226 232 240; --muted: 148 163 184; --accent: 82 173 222; --hit-bg: 180 83 9; }
+
+    .page{ background-color: rgb(var(--page-bg)); color: rgb(var(--ink)); }
+
+    /* Premium drop cap */
+    .dropcap::first-letter{
+      font-family: 'Playfair Display', serif; float: left; font-size: 3.4em; line-height: 1; font-weight: 700; margin: 0.1rem 0.25rem 0 0.1rem; color: rgb(var(--accent));
+    }
+
+    .prose p{ margin: 0 0 1rem 0; }
+    .prose h3{ margin-top: 1.4rem; margin-bottom: 0.6rem; }
+    .prose a{ color: rgb(var(--accent)); text-decoration: none; }
+
+    .ribbon{ position: relative; padding-left: 1rem; }
+    .ribbon::before{ content: ''; position: absolute; left: 0; top: 0.25rem; bottom: 0.25rem; width: 4px; border-radius: 9999px; background: rgb(var(--accent)); }
+
+    .callout{ border-left: 4px solid rgb(var(--accent)); }
+    .measure{ max-width: 68ch; }
+
+    .fade-enter{ opacity: 0; transform: translateY(4px); }
+    .fade-enter-active{ opacity: 1; transform: translateY(0); transition: all .35s ease; }
+
+    .dark .modal-content{ background-color: rgb(20,24,32); color: rgb(226,232,240); }
+
+    /* Highlight for search hits */
+    mark.search-hit{ background: rgb(var(--hit-bg)); padding: .1rem .2rem; border-radius: .25rem; }
+
+    /* Better dark borders */
+    .dark .border-slate-200{ border-color: #334155 !important; }
+
+    /* Improved dark mode header text */
+    .dark .text-deep{ color: #f1f5f9 !important; }
+    .dark .text-slate-500{ color: #94a3b8 !important; }
+
+    /* Improved dark mode for text-to-speech buttons */
+    .dark #playAudio, .dark #stopAudio {
+      background-color: #334155 !important;
+      border-color: #475569 !important;
+      color: #f1f5f9 !important;
+    }
+    
+    .dark #playAudio:hover, .dark #stopAudio:hover {
+      background-color: #475569 !important;
+    }
+
+    /* Mobile header grid spacing */
+    .header-grid{ display: grid; grid-template-columns: 1fr; gap: .5rem; }
+    @media (min-width: 768px){ .header-grid{ grid-template-columns: auto 1fr auto; align-items: center; } }
+
+    /* Improved comment section for dark mode */
+    .dark #commentsList .ribbon {
+      background-color: #1e293b !important;
+      border-color: #334155 !important;
+    }
+
+    /* Improved search bar for dark mode */
+    .dark .input-group-text {
+      background-color: #334155 !important;
+      border-color: #475569 !important;
+      color: #e2e8f0 !important;
+    }
+    
+    .dark .form-control {
+      background-color: #1e293b !important;
+      border-color: #475569 !important;
+      color: #f1f5f9 !important;
+    }
+    
+    .dark .form-control::placeholder {
+      color: #94a3b8 !important;
+    }
+  </style>
+</head>
+<body class="page font-serif antialiased">
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/90 dark:bg-slate-900/90 dark:supports-[backdrop-filter]:bg-slate-900/70 border-b border-slate-200 dark:border-slate-800 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 header-grid">
+      <div class="flex items-center gap-3">
+        <button id="tocToggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200" aria-label="Fungua orodha ya sura">
+          <i class="bi bi-list text-xl"></i>
+        </button>
+        <div class="flex items-center gap-2 w-full">
+          <span class="inline-flex w-9 h-9 rounded-lg bg-gradient-to-r from-brand-500 to-brand-600 text-white items-center justify-center shadow-soft transform hover:scale-105 transition-transform duration-200"><i class="bi bi-book"></i></span>
+          <div class="leading-tight w-full">
+            <h1 class="m-0 p-0 text-deep font-display text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-brand-600 to-deep bg-clip-text text-transparent">The Psychology of Money</h1>
+            <p class="m-0 p-0 text-xs sm:text-sm text-slate-500 dark:text-slate-400">Tafsiri ya Kiswahili • Muundo wa Kitabu cha Biblia</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex-1 md:flex-initial">
+          <div class="input-group">
+            <span class="input-group-text bg-transparent border-slate-300 dark:border-slate-700 rounded-l-xl"><i class="bi bi-search"></i></span>
+            <input id="searchInput" type="text" class="form-control border-slate-300 dark:border-slate-700 bg-transparent rounded-r-xl focus:ring-2 focus:ring-brand-500" placeholder="Tafuta neno/somo..."/>
+          </div>
+        </div>
+      </div>
+      <div class="ms-auto flex items-center gap-2 justify-end">
+        <div class="dropdown">
+          <button class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 dropdown-toggle transition-all duration-200" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-translate"></i>
+            <span class="hidden md:inline" id="langLabel">Lugha</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item lang-opt" data-lang="sw">Kiswahili</a></li>
+            <li><a class="dropdown-item lang-opt" data-lang="en">English</a></li>
+          </ul>
+        </div>
+        <button id="themeBtn" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200" title="Badili mandhari">
+          <i class="bi bi-brightness-high"></i>
+          <span class="hidden md:inline" data-i18n="theme">Mandhari</span>
+        </button>
+        <div class="dropdown">
+          <button class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 dropdown-toggle transition-all duration-200" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-type"></i>
+            <span class="hidden md:inline" data-i18n="appearance">Mwonekano</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><h6 class="dropdown-header">Aina ya Fonti</h6></li>
+            <li><a class="dropdown-item" data-font="serif">Serif (Merriweather)</a></li>
+            <li><a class="dropdown-item" data-font="sans">Sans (Inter)</a></li>
+            <li><a class="dropdown-item" data-font="mono">Mono (JetBrains Mono)</a></li>
+            <li><a class="dropdown-item" data-font="lora">Lora</a></li>
+            <li><a class="dropdown-item" data-font="sourceSerif">Source Serif Pro</a></li>
+            <li><a class="dropdown-item" data-font="nunito">Nunito</a></li>
+            <li><a class="dropdown-item" data-font="poppins">Poppins</a></li>
+            <li><a class="dropdown-item" data-font="rslab">Roboto Slab</a></li>
+            <li><a class="dropdown-item" data-font="literata">Literata</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><h6 class="dropdown-header">Ukubwa</h6></li>
+            <li class="px-3 py-2" id="textSizer">
+              <div class="d-flex gap-2 align-items-center">
+                <button id="decText" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="bi bi-dash-lg"></i></button>
+                <div id="textSizeLabel" class="text-sm">100%</div>
+                <button id="incText" class="btn btn-outline-secondary btn-sm rounded-circle"><i class="bi bi-plus-lg"></i></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button id="notesBtn" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200" title="Nukuu & Maelezo">
+          <i class="bi bi-chat-left-text"></i>
+          <span class="hidden lg:inline" data-i18n="notes">Maelezo</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Voice Selection Modal -->
+  <div class="modal fade" id="voiceSelectionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-2xl">
+        <div class="modal-header">
+          <h5 class="modal-title">Chagua Sauti ya Kusoma (Select Reading Voice)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted">Tafadhali chagua moja ya sauti hizi za Kiswahili kutoka kwa ElevenLabs:</p>
+          <div class="row g-3">
+            <!-- Voice Buttons -->
+            <div class="col-12">
+              <div class="card border border-primary">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6>Domi</h6>
+                    <small class="text-muted">Sauti ya kike, nuru, na wazi</small>
+                  </div>
+                  <button class="btn btn-outline-primary voice-select-btn" data-voice-id="pNInz6obpgDQGcFZG0B1">Chagua</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6>Antoni</h6>
+                    <small class="text-muted">Sauti ya kiume, imara, na ya kawaida</small>
+                  </div>
+                  <button class="btn btn-outline-primary voice-select-btn" data-voice-id="ErXwobaYiN019PkySvjV">Chagua</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6>Arnold</h6>
+                    <small class="text-muted">Sauti ya kiume, nzito, na ya kina</small>
+                  </div>
+                  <button class="btn btn-outline-primary voice-select-btn" data-voice-id="VR6AewLTigWG4xSOukaG">Chagua</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6>Elli</h6>
+                    <small class="text-muted">Sauti ya kike, tamu, na ya utulivu</small>
+                  </div>
+                  <button class="btn btn-outline-primary voice-select-btn" data-voice-id="MF3mGyEYCl7XYWbV9V6O">Chagua</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6>Josh</h6>
+                    <small class="text-muted">Sauti ya kiume, ya kijana, na ya urambazaji</small>
+                  </div>
+                  <button class="btn btn-outline-primary voice-select-btn" data-voice-id="TxGEqnHWrfWFTfGW9XjX">Chagua</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[300px,1fr] gap-4 px-4 sm:px-6 py-6">
+    <aside id="toc" class="md:sticky md:top-24 h-max hidden md:block">
+      <div class="bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-soft overflow-hidden">
+        <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-gradient-to-r from-brand-50 to-white dark:from-slate-900 dark:to-slate-900">
+          <div class="flex items-center justify-between">
+            <h2 class="font-display text-deep text-lg m-0" data-i18n="toc">Orodha ya Sura</h2>
+            <button id="collapseAll" class="text-sm text-brand-700 hover:underline" data-state="open" data-i18n="collapse">Funga zote</button>
+          </div>
+        </div>
+        <nav id="chaptersList" class="divide-y divide-slate-100 dark:divide-slate-800"></nav>
+      </div>
+    </aside>
+
+    <section>
+      <article id="reader" class="bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-soft p-5 sm:p-8">
+        <div id="chapterHeader" class="mb-6">
+          <div class="text-xs uppercase tracking-wider text-slate-500" data-i18n="chapter">Sura</div>
+          <h2 id="chapterTitle" class="font-display text-2xl md:text-3xl text-deep m-0"></h2>
+          <div id="chapterMeta" class="text-sm text-slate-500 mt-2"></div>
+        </div>
+        <div class="d-flex gap-2 mb-4">
+          <button id="playAudio" class="btn btn-sm btn-outline-brand-500" onclick="startSpeaking()"><i class="bi bi-play-circle me-1"></i>Soma kwa Sauti</button>
+          <button id="stopAudio" class="btn btn-sm btn-outline-danger" onclick="stopSpeaking()" style="display:none;"><i class="bi bi-stop-circle me-1"></i>Acha Kusoma</button>
+        </div>
+
+        <div id="chapterBody" class="prose prose-slate dark:prose-invert max-w-none measure"></div>
+
+        <div id="quotesWrap" class="mt-8 hidden">
+          <h3 class="font-display text-xl" data-i18n="quotes">Nukuu Muhimu</h3>
+          <div id="quotesList" class="grid sm:grid-cols-2 gap-4"></div>
+        </div>
+
+        <div id="commentsWrap" class="mt-8 hidden">
+          <h3 class="font-display text-xl" data-i18n="comments">Maelezo / Comments</h3>
+          <div id="commentsList" class="space-y-3"></div>
+        </div>
+
+        <div class="mt-10 flex items-center justify-between text-sm text-slate-500">
+          <div id="progressLabel">Sura 1 ya N</div>
+          <div class="flex items-center gap-2">
+            <button id="prevBtn" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> <span data-i18n="prev">Nyuma</span></button>
+            <button id="nextBtn" class="btn btn-outline-secondary"><span data-i18n="next">Mbele</span> <i class="bi bi-arrow-right"></i></button>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="modal fade" id="notesModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content rounded-2xl">
+        <div class="modal-header">
+          <h5 class="modal-title" data-i18n="modalTitle">Nukuu & Maelezo ya Sura</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="modalContent"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="close">Funga</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-8 px-4 sm:px-6 border-t border-slate-200 dark:border-slate-800 text-center text-sm text-slate-500">
+    <div class="max-w-7xl mx-auto">
+      <p class="m-0">Made with ❤️ <button id="authorBtn" class="border-0 bg-transparent fw-bold" style="color:#7c3aed; text-decoration:underline;">Claytone Curth</button></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+  <script>
+    //---------- i18n labels ----------
+    const I18N = {
+      sw: { 
+        theme:'Mandhari', 
+        appearance:'Mwonekano', 
+        notes:'Maelezo', 
+        toc:'Orodha ya Sura', 
+        collapse:'Funga zote', 
+        expand:'Onyesha zote', 
+        chapter:'Sura', 
+        quotes:'Nukuu Muhimu', 
+        comments:'Maelezo / Comments', 
+        modalTitle:'Nukuu & Maelezo ya Sura', 
+        close:'Funga', 
+        prev:'Nyuma', 
+        next:'Mbele', 
+        play:'Soma kwa Sauti',
+        stop:'Acha Kusoma',
+        progress:(n,t)=>`Sura ${n} ya ${t}` 
+      },
+      en: { 
+        theme:'Theme', 
+        appearance:'Appearance', 
+        notes:'Notes', 
+        toc:'Table of Contents', 
+        collapse:'Collapse all', 
+        expand:'Expand all', 
+        chapter:'Chapter', 
+        quotes:'Key Quotes', 
+        comments:'Notes / Comments', 
+        modalTitle:'Chapter Quotes & Notes', 
+        close:'Close', 
+        prev:'Back', 
+        next:'Next', 
+        play:'Read Aloud',
+        stop:'Stop Reading',
+        progress:(n,t)=>`Chapter ${n} of ${t}` 
+      }
+    };
+
+    //---------- Data: Chapters (SW + EN) ----------
+    const chaptersSW = [
+   {
+  "id": "ch1",
+  "number": 1,
+  "title": "📖 SURA YA 1: HAKUNA ALIYE MWENDAWAZIMU  (No One’s Crazy)",
+  "tags": [
+    "tabia",
+    "historia binafsi",
+    "bias",
+    "mtazamo"
+  ],
+  "time": "Dakika ~18 kusoma",
+  "quotes": [
+    "Uzoefu wako binafsi ni chembe ndogo ya historia ya fedha, lakini kwa akili yako huwa karibu 80% ya namna unavyofikiria kuhusu pesa.",
+    "Maamuzi ya kifedha huwa na mantiki kwa yule anayeyafanya ndani ya mazingira na historia yake binafsi.",
+    "Kila mtu ana simulizi tofauti, kwa hiyo kila mtu ana akili tofauti ya kifedha."
+  ],
+  "comments": [
+    "Generational imprinting: uzoefu wa kiuchumi wakati mtu anaanza maisha yake ya utu uzima hubaki kama alama ya kudumu ya kifedha kwa kizazi kizima.",
+    "Kama mtu aliwahi kushuhudia mfumuko mkubwa wa bei, au mdororo wa soko, hiyo itamuathiri zaidi kuliko takwimu alizosoma baadaye.",
+    "Usihukumu haraka – uamuzi unaoonekana “kijinga” kwako unaweza kuwa mkakati wa kuishi (survival strategy) kwa mwingine.",
+    "Fedha si namba pekee; ni hisia, kumbukumbu na simulizi binafsi zinazoathiri fikra zako."
+  ],
+  "body": "<h3><span style='color: #FFC107;'>Dhamira Kuu ya Mwandishi</span></h3><p class='dropcap'>Mwandishi anaanza kwa kutufundisha jambo la msingi sana: <i>Hakuna mtu aliye mwendawazimu kuhusu fedha.</i> Watu wanaweza kufanya mambo ambayo yanaonekana ya ajabu sana kiakili au kihisabati, lakini kwao mambo hayo yana mantiki kamili, kwa sababu ya mazingira na uzoefu wao binafsi.</p><h3><span style='color: #2196F3;'>Ufafanuzi wa Msingi</span></h3><p>Kila mtu duniani amelelewa kwenye mazingira tofauti, familia tofauti, kipato tofauti, historia ya uchumi tofauti, na hivyo mtazamo wao kuhusu pesa ni wa kipekee. Kinachoonekana <b>“kicha” kwako</b>, kwangu kinaweza kuonekana <i>mantiki</i>. Kila mtu anafanya maamuzi ya kifedha kwa kuzingatia uzoefu wake binafsi, si kwa kuzingatia historia ya ulimwengu wote.</p><h3><span style='color: #F44336;'>Mifano Muhimu Iliyotolewa na Mwandishi</span></h3><p>Mwandishi anatumia mifano kadhaa:</p><ul><li><b>Mfano wa umaskini vs. utajiri:</b> Mtu aliyelelewa kwenye umaskini mkubwa, ataona hatari ya kifedha kwa jicho tofauti kabisa na mtoto wa benki tajiri. Wakati mtoto wa tajiri anaona uwekezaji wa risk kama <i>adventure</i> ya kawaida, mtoto wa maskini anaona ni tishio la maisha.</li><li><b>Mfano wa mfumuko wa bei (inflation):</b> Aliyeishi kipindi cha mfumuko mkubwa wa bei ataishi maisha yake yote <b>akiogopa</b> gharama kupanda. Aliyelelewa kwenye uchumi thabiti ataona mfumuko wa bei si kitu cha kuhofia sana.</li><li><b>Mfano wa Ajira:</b> Wakati wa mdororo wa uchumi kama <i>The Great Depression</i>, watu walipoteza kila kitu na kubaki na hofu ya kudumu. Hata hivyo, mtu kama John F. Kennedy, aliyekulia kwenye familia tajiri wakati huo, alisema hakuwahi kuathirika na alielewa mdororo kwa kusoma vitabu tu, si kwa <b>kuishi.</b></li></ul><p>Hapa mwandishi anatufundisha kwamba uzoefu wetu binafsi una nguvu kuliko historia yote tuliyosoma. Ndiyo maana watu wenye akili sawa wanaweza kutofautiana sana kuhusu namna bora ya kushughulika na fedha.</p><h3><span style='color: #9C27B0;'>Utafiti wa Kisayansi</span></h3><p>Mwandishi ananukuu utafiti wa wachumi <b>Ulrike Malmendier</b> na <b>Stefan Nagel</b> (2006) ambao ulichunguza tabia za kifedha za Wamarekani kwa miaka 50. Waligundua kuwa maamuzi ya watu ya kuwekeza hutegemea zaidi uzoefu wao wa kifedha wakiwa vijana kuliko elimu au taarifa wanazopata baadaye. <i>Hitimisho ni kwamba maamuzi ya kifedha hayategemei akili bali historia binafsi na uzoefu.</i></p><h3><span style='color: #FF5722;'>Mfano wa Kipekee: Tiketi za Bahati Nasibu</span></h3><p>Wamarekani hutumia fedha zaidi kwenye tiketi za bahati nasibu kuliko kwenye michezo, vitabu, sinema, n.k. Wanaozinunua zaidi ni maskini, ambao mara nyingi hawana akiba ya dharura ya dola 400. Kwa mtu wa kipato cha kati au tajiri, hii inaonekana ni upuuzi. Lakini kwa maskini, tiketi ya bahati nasibu ni <b>nafasi pekee ya kuota ndoto ya maisha bora</b>. Wanalipia ndoto na tumaini, siyo tu tiketi. Ujumbe hapa ni kwamba hata kitu kinachoonekana 'kicha' kwa wengine, kinaweza kuwa na mantiki kwa mtu aliye kwenye hali hiyo.</p><h3><span style='color: #E91E63;'>Mtazamo wa Mwandishi</span></h3><p>Fedha ni kitu kipya kihistoria. Mambo kama kustaafu, mikopo ya wanafunzi, na kadi za mikopo yamekuja miaka 40–50 iliyopita tu. Watu hatuna uzoefu mrefu wa kihistoria wa kushughulika na haya, ndiyo maana tunafanya makosa mengi ya kifedha.</p><h3><span style='color: #03A9F4;'>Ujumbe Mkuu wa Sura ya 1</span></h3><p>Hakuna mtu aliye mwendawazimu kuhusu pesa. Kila mtu anafanya maamuzi yanayolingana na uzoefu wake binafsi. Uzoefu wetu binafsi una nguvu zaidi kuliko historia ya uchumi au vitabu tulivyosoma. Tofauti za vizazi na mazingira zinaumba mitazamo tofauti juu ya hatari, uwekezaji, na pesa. <b>Usiwahukumu wengine haraka, kwa sababu kile kinachoonekana upuuzi kwako, kwao ni suluhisho la maisha.</b></p>"
+}
+,
+      {
+  "id": "ch2",
+  "number": 2,
+  "title": "📖 SURA YA 2: BAHATI NA HATARI (Luck & Risk)",
+  "tags": [
+    "bahati",
+    "hatari",
+    "mafanikio",
+    "upendeleo"
+  ],
+  "time": "Dakika ~15 kusoma",
+  "quotes": [
+    "Bahati na hatari ni ndugu. Zote ni ukweli kwamba kila matokeo maishani yanaongozwa na nguvu zaidi ya juhudi za mtu binafsi."
+  ],
+  "comments": [
+    "Mstari kati ya ujasiri na ujinga ni mwembamba; matokeo hutegemea bahati na hatari.",
+    "Usimhukumu haraka mwingine kwa matokeo yake; huwezi kujua kiwango cha bahati au hatari kilichohusika."
+  ],
+  "body": "<h3><span style='color: #FFC107;'>Dhamira Kuu</span></h3><p class='dropcap'>Mwandishi anasema kwamba mafanikio ya kifedha au kushindwa si matokeo ya bidii au makosa binafsi pekee. Mara nyingi, matokeo haya huchochewa na nguvu zisizo katika udhibiti wa mtu binafsi: <b>Bahati</b> (<i>luck</i>) – nafasi nzuri, au mazingira mazuri yaliyokujia bila jitihada zako; na <b>Hatari</b> (<i>risk</i>) – tukio baya au hali mbaya inayotokea bila kosa lako.</p><h3><span style='color: #2196F3;'>Kisa cha Bill Gates: Nguvu ya Bahati</span></h3><p>Mwandishi anaanza na hadithi ya Bill Gates. Gates alisoma katika shule ya sekondari ya <b>Lakeside School</b>, ambayo mwishoni mwa miaka ya 1960 ilikuwa miongoni mwa shule chache sana duniani zenye kompyuta ya kisasa. Wanafunzi wenzake walikuwa wachache tu, na Gates na Paul Allen walipata fursa ya kipekee ya kuitumia kompyuta hiyo bila kikomo. Gates mwenyewe alikiri kwamba, “Kama isingekuwepo Lakeside School, isingekuwepo Microsoft.” Hii inaonyesha kwamba, ingawa Gates ni mtu mwenye akili na bidii, bahati ya kusoma katika shule hiyo ilimpa mwanzo wa kipekee.</p><h3><span style='color: #F44336;'>Kisa cha Kent Evans: Nguvu ya Hatari</span></h3><p>Kinyume na Gates, kulikuwa na rafiki yake wa karibu, <b>Kent Evans</b>. Kwa maneno ya Gates mwenyewe, Evans alikuwa mwanafunzi bora zaidi, mwenye maono makubwa na ari ya kufanikisha mambo. Walipanga mipango ya baadaye pamoja na walitarajia kuanzisha kampuni pamoja. Hata hivyo, Kent alikufa katika ajali ya kupanda mlima akiwa bado kijana. Ajali hiyo ilikuwa hatari ya nadra sana, lakini ilimtokea. Mwandishi anasema, huwezi kuamini kuwa bahati ipo bila pia kukubali kuwa hatari ipo. Bahati na hatari ni <b>ndugu</b>, zote zinafanya kazi nje ya udhibiti wako na zinaweza kubadilisha maisha yako haraka.</p><h3><span style='color: #9C27B0;'>Mafundisho Makuu ya Mwandishi</span></h3><p>Mwandishi anatufundisha kwamba matokeo maishani, iwe ni mafanikio au kushindwa, si mazuri au mabaya sana kama tunavyofikiria. Ukifanikiwa, usiweke mafanikio yako yote kwenye kigezo cha akili au bidii zako, kwa sababu kuna bahati pia. Ukishindwa, usijilaumu kupita kiasi, kwa sababu kuna hatari pia. Mifano mingine inatolewa:</p><ul><li><b>Vanderbilt & Rockefeller:</b> Walivunja sheria, lakini historia inawaona kama wajasiriamali. Mwandishi anaonyesha kwamba matokeo hutegemea bahati/hatari.</li><li><b>Benjamin Graham:</b> Mwekezaji mashuhuri alipata mafanikio makubwa kutoka kwenye hisa za GEICO, kinyume na kanuni zake za uwekezaji. Hapa, mwandishi anauliza, ilikuwa bahati au ujasiri?</li><li><b>Mark Zuckerberg vs. Yahoo!:</b> Zuckerberg alikataa ofa kubwa ya kuuza Facebook na akafanikiwa, ilhali Yahoo! ilikataa ofa ya Microsoft na haikufanikiwa. Mwandishi anasema matokeo yamepindishwa na bahati na hatari, na watu wanapenda kutoa hadithi rahisi nyuma yake.</li></ul><h3><span style='color: #E91E63;'>Hitimisho la Sura</span></h3><p>Jifunze kutoka kwenye mifumo na mwenendo wa jumla, si kisa kimoja cha kipekee, kwa sababu matokeo ya kipekee yanachangiwa zaidi na bahati na hatari. Unapofaulu, kuwa mnyenyekevu kwa sababu bahati imechangia. Unaposhindwa, jipe rehema na usijilaumu sana, kwa sababu si kila kushindwa ni kosa la uzembe. Badala ya kujilinganisha na mtu mmoja, jifunze mifumo ya jumla inayoweza kukusaidia katika maisha yako. Ujumbe wa mwisho wa mwandishi ni: “Hakuna mafanikio yaliyo mazuri sana kama unavyodhani, na hakuna kushindwa kuliko vibaya sana kama unavyodhani. Bahati na hatari zinaendesha sehemu kubwa ya maisha yetu.”</p>"
+}
+
+,
+
+{
+  "id": "ch3",
+  "number": 3,
+  "title": "📖 SURA YA 3: HAITOSHI (Never Enough)",
+  "tags": [
+    "tamaa",
+    "hatari",
+    "mafanikio",
+    "kuridhika"
+  ],
+  "comments": [
+    "Rajat Gupta & Bernie Madoff: walikuwa na 'zaidi ya kutosha', tamaa ikavunja heshima na uhuru.",
+    "Kujilinganisha na wengine ni vita isiyowezekana kushinda, kwa sababu kila wakati utapata mtu anayefanya vizuri zaidi."
+  ],
+  "body": "<h3><span style='color: #FFC107;'>Dhamira Kuu</span></h3><p class='dropcap'>Mwandishi anasema kwamba tatizo kubwa la kifedha si kutopata pesa, bali ni **kutoridhika** na tulicho nacho. Hata ukiwa na mamilioni, bado unaweza kuharibu maisha yako kwa sababu unaona bado haitoshi. Ukosefu wa kutambua kile kilicho cha kutosha (<i>enough</i>) ni chanzo cha hatari kubwa zaidi katika fedha na maisha.</p><h3><span style='color: #2196F3;'>Hadithi ya kuanzia: Joseph Heller na Mfanyabiashara wa Hedge Fund</span></h3><p>John Bogle (mwanzilishi wa Vanguard) aliwahi kusimulia kisa hiki: Katika sherehe ya tajiri mkubwa, mwandishi Joseph Heller (wa kitabu maarufu <i>Catch-22</i>) aliambiwa kuwa tajiri huyo ametengeneza pesa nyingi kwa siku moja kuliko yeye alivyowahi kupata kwa kitabu chake chote. Heller akajibu kwa utulivu: “Ndiyo, lakini mimi nina kitu ambacho yeye hatakuwahi kuwa nacho… <b>Enough (cha kutosha)</b>”. Ujumbe hapa ni kwamba tajiri huyo alikuwa na mabilioni, lakini bado anaona haitoshi, ilhali Heller alikuwa na kiasi kidogo lakini alikuwa ameshiba moyoni.</p><h3><span style='color: #F44336;'>Mifano ya Watu Walioanguka kwa Tamaa ya Kutoridhika</span></h3><p>1. <b>Rajat Gupta – kutoka maskini hadi CEO wa McKinsey:</b> Gupta alizaliwa India kwenye umaskini, akawezeshwa kielimu, na akapanda ngazi hadi kuwa CEO wa McKinsey, kampuni maarufu duniani. Alistaafu na utajiri wa zaidi ya $100 milioni na alifanya kazi na Bill Gates kwenye miradi ya kifilantropia. Lakini hakuridhika, alitaka kuwa bilionea. Akiwa mjumbe wa bodi ya Goldman Sachs, alipata taarifa za siri, akaziwasilisha kwa rafiki yake, na wakatengeneza mamilioni. Baadaye, alipatikana na hatia ya <i>insider trading</i> na akaenda jela, akapoteza heshima yake, kazi, na jina lake. Ujumbe ni kwamba, Gupta alipoteza kila kitu cha maana kwa sababu aliona haitoshi.</p><p>2. <b>Bernie Madoff – mhalifu aliyekuwa na biashara halali:</b> Madoff anajulikana kwa <i>Ponzi Scheme</i> kubwa zaidi katika historia. Lakini kabla ya wizi huo, alikuwa na biashara halali kabisa iliyomletea kati ya $25–$50 milioni kwa mwaka. Hata hivyo, hakuridhika na aliingia kwenye udanganyifu ili kupata zaidi na zaidi, na matokeo yake ni aliishia kifungoni na jina lake likafutika. Ujumbe hapa ni kwamba alikuwa na 'enough' lakini aliona haitoshi, hivyo akapoteza kila kitu.</p><h3><span style='color: #9C27B0;'>Mafundisho Makuu ya Mwandishi</span></h3><p>Mwandishi anatoa mambo kadhaa ya kuzingatia:</p><ul><li><b>Kujua lini unasema “inatosha” ni ujuzi mkubwa:</b> Wengi wanapopata mafanikio, wanataka mara mbili zaidi. Kila wanaposogea mbele, lengo linaendelea kusogea. Housel anasema hii ni hatari kwa sababu watu huchukua hatari zaidi na zaidi kufikia matarajio yasiyoisha.</li><li><b>Ukilinganisha maisha yako na wengine, hutawahi kuona kimekutosha:</b> Mwandishi anatumia mfano wa mchezaji wa baseball, meneja wa hedge fund, na Jeff Bezos. Kila ngazi kuna aliye juu yako, na hakuna mtu atakayewahi kufika juu kabisa kwenye ngazi ya kulinganisha. Ukianza mchezo huu, hutamaliza.</li><li><b>“Enough” si uzembe, ni hekima:</b> Wengine hufikiri kusema 'inatosha' ni kukosa tamaa. Lakini ukweli ni kwamba kusema 'inatosha' kunakulinda dhidi ya kupoteza kile cha maana (familia, marafiki, heshima, furaha) kwa kutafuta zaidi usiyohitaji.</li><li><b>Kuna vitu ambavyo havina bei:</b> Heshima yako, familia, uhuru, upendo, na furaha ni baadhi ya vitu ambavyo havipaswi kuwekwa rehani kwa tamaa ya pesa zaidi. Tamaa ya kutoridhika inaweza kukufanya uviuze vitu hivi na mwishowe utavipoteza vyote.</li></ul><h3><span style='color: #03A9F4;'>Ujumbe Mkuu wa Sura ya 3</span></h3><p>Kutoridhika (<i>Never Enough</i>) ni adui mkubwa wa usalama wa kifedha. Gupta na Madoff walipoteza kila kitu kwa sababu hawakujua inatosha. Kujilinganisha na wengine hakutamalizika kamwe; hakuna atakayeshinda kwenye mchezo wa “nani ana zaidi.” Kusema “inatosha” ni ngao ya heshima, furaha, na utulivu wa akili. Furaha, kama ilivyosemwa, ni matokeo pungufu ya matarajio; ukidhibiti matarajio, utakuwa na furaha hata bila mali zaidi.</p>"
+}
+,
+     {
+  "id": "ch4",
+  "number": 4,
+  "title": "📖 Sura ya 4: Confounding Compounding (Nguvu ya Riba Inayojikusanya na Kwa Nini Ni Vigumu Kuielewa)",
+  "tags": [
+    "compounding",
+    "muda",
+    "uvumilivu",
+    "riba"
+  ],
+  "time": "Dakika ~15 kusoma",
+  "quotes": [
+    "Utajiri mkubwa zaidi duniani hautokani na akili ya kipekee pekee, bali unatokana na muda na uvumilivu.",
+    "Nguvu kubwa zaidi kwenye fedha si akili ya hesabu, si ujuzi wa uchambuzi, bali ni riba inayojikusanya (compound interest).",
+    "Siri ya utajiri si 'kuwa mjanja kuliko wengine,' bali ni 'kuwa mvumilivu kuliko wengine.'"
+  ],
+  "comments": [
+    "Siri ya Warren Buffett si ubunifu, ni muda na uvumilivu.",
+    "Akili ya binadamu haielewi 'exponential growth' kwa urahisi; tunapenda 'linear growth'.",
+    "Uvumilivu ni kipaji chenye nguvu zaidi kuliko akili ya juu ya hesabu."
+  ],
+  "body": "<h3><span style='color: #FFC107;'>Dhamira Kuu ya Mwandishi</span></h3><p class='dropcap'>Morgan Housel anatufundisha kwamba: **Utajiri mkubwa zaidi duniani hautokani na akili ya kipekee pekee, bali unatokana na muda na uvumilivu.** Nguvu kubwa zaidi kwenye fedha si akili ya hesabu, si ujuzi wa uchambuzi, bali ni riba inayojikusanya (compound interest). Tatizo ni kwamba akili ya mwanadamu haijaumbwa kuelewa vizuri nguvu ya ukuaji wa tarakimu kwa mfumo wa mchepuko (<i>exponential growth</i>). Tunapenda mstari ulionyooka (<i>linear growth</i>).</p><h3><span style='color: #2196F3;'>Mfano wa Warren Buffett – Siri si Ubunifu, ni Muda</span></h3><p>Warren Buffett ni mwekezaji anayejulikana zaidi duniani. Mara nyingi watu wanasema siri ya mafanikio yake ni akili yake ya kipekee ya kifedha. Ni kweli ana akili kubwa, lakini kiuhalisia, siri kubwa ya utajiri wake ni kwamba alianza mapema na akaendelea kuwekeza kwa muda mrefu sana. Buffett alianza kuwekeza akiwa na umri wa miaka 10. Alipofika umri wa miaka 30, alikuwa na karibu $1,000,000 (kwa dola za miaka ya 1960 – ambazo leo zingekuwa mamilioni zaidi). Lakini cha kushangaza zaidi: $81.5 bilioni kati ya $84.5 bilioni za utajiri wake wa mwisho (95%) alizipata baada ya kufikisha umri wa miaka 65. Hii inaonyesha kuwa si akili yake tu iliyomfanya awe tajiri, bali ni uwezo wake wa kuvumilia muda mrefu na kuacha pesa zikue. Hitimisho: Warren Buffett hakutajirika kwa sababu tu ya kuwa mwekezaji bora zaidi duniani – alitajirika kwa sababu alianza mapema sana na hakusimama.</p><h3><span style='color: #F44336;'>Mfano wa Riba Inayojikusanya</span></h3><p>Mwandishi anatoa mfano wa tofauti kubwa kati ya ukuaji wa mstari na ukuaji wa mchepuko (<i>linear vs exponential growth</i>):</p><ul><li><b>Ukuaji wa mstari (linear):</b> Ukitembea hatua moja ya mita moja kila sekunde 30, baada ya dakika moja utakuwa umeenda mita 2.</li><li><b>Ukuaji wa mchepuko (exponential/compounding):</b> Ukitembea hatua inayoongezeka maradufu kila sekunde 30 (1, 2, 4, 8, 16, …), baada ya dakika moja utakuwa umeenda mita 31. Baada ya dakika mbili, utakuwa umeenda mita 511. Baada ya dakika tano, utakuwa mbali zaidi ya mita milioni 1.</li></ul><p>Ujumbe: Ukuaji wa mchepuko unaanza taratibu, lakini baada ya muda unakuwa na nguvu kubwa isiyozuilika.</p><h3><span style='color: #9C27B0;'>Kwa Nini Watu Hushindwa Kuelewa Compounding</span></h3><p>Mwandishi anasema: Akili ya binadamu imejengeka kuelewa mambo ya mstari (<i>linear thinking</i>) – tukisema “kila siku nitapata kidogo zaidi” tunajua itapanda kwa mstari. Lakini ukuaji wa mchepuko (<i>exponential growth</i>) ni mgumu kufikirika. Mara nyingi watu hudharau athari yake kwa muda mrefu. Ndiyo maana watu wengi hushindwa kuvumilia kuwekeza kwa muda mrefu – wanaona hakuna mabadiliko makubwa mwanzoni, wanakata tamaa.</p><h3><span style='color: #FF5722;'>Mfano wa Hisa za Warren Buffett</span></h3><p>Buffett si “<i>best stock picker</i>” kila mara. Mara nyingi amefanya makosa kama wawekezaji wengine. Lakini kwa sababu amewekeza kwa muda wa miaka 80+, makosa hayo yamefunikwa na nguvu ya riba ya muda mrefu. Mfano wa namba: Kama Buffett angeanza kuwekeza akiwa na miaka 30 (badala ya miaka 10), na akaacha akiwa na miaka 60 (badala ya kuendelea hadi 90+), leo angekuwa na si zaidi ya $12 milioni tu. Kwa maneno mengine: utajiri wake wa zaidi ya $80 bilioni unatokana na muda aliotumia, sio akili pekee.</p><h3><span style='color: #E91E63;'>Mifano ya Maisha Halisi – Nguvu ya Muda</span></h3><ul><li><b>Mfano wa dola moja:</b> Ukiwekeza $1 na ipate riba ya 10% kwa mwaka: Baada ya miaka 50, utakuwa na $117.39. Ujumbe: Kiasi kidogo cha muda mfupi hakionekani. Lakini muda mrefu hutoa matokeo ya ajabu.</li><li><b>Mfano wa maskini vs tajiri:</b> Maskini mara nyingi huchagua matumizi ya haraka (kula leo, starehe leo) kwa sababu hawaoni thamani ya kusubiri miaka mingi. Tajiri, akijua siri ya <i>compounding</i>, huacha pesa ikue kwa miongo. Tofauti kubwa ya maisha yao baada ya miaka 30–40 si kwa sababu ya kipato cha mwanzo, bali ni kwa sababu ya tabia ya uvumilivu.</li></ul><h3><span style='color: #03A9F4;'>Mafundisho ya Kisaikolojia</span></h3><p>Mwandishi anasisitiza: Kitu kigumu zaidi si kuhesabu riba ya <i>compounding</i> – ni kuvumilia kisaikolojia muda mrefu bila kukatishwa tamaa. Watu wengi wanataka matokeo ya haraka, wanashindwa kusubiri, wanaacha kuwekeza, au wanauza hisa zao mapema kwa sababu hawajui nguvu ya muda. <i>Compounding</i> si tu hesabu ya fedha, ni mafunzo ya akili ya binadamu kujifunza kusubiri.</p><h3><span style='color: #9C27B0;'>Ujumbe Mkuu wa Mwandishi</span></h3><p>Riba inayojikusanya (<i>compounding</i>) ni nguvu kubwa zaidi ya kifedha duniani. Siri ya utajiri si “kuwa mjanja kuliko wengine,” bali ni “kuwa mvumilivu kuliko wengine.” Warren Buffett hakufanikiwa kwa kuwa bora zaidi kila mara, bali kwa kuwa alicheza mchezo mrefu zaidi kuliko mtu yeyote. Matokeo ya muda mfupi mara nyingi hayana maana – kilicho cha maana ni mwelekeo wa muda mrefu. Uvumilivu ni kipaji chenye nguvu zaidi kuliko akili ya juu ya hesabu.</p><h3><span style='color: #4CAF50;'>Hitimisho la Sura ya 4</span></h3><p><i>Compounding</i> ni ngumu kuamini kwa sababu inakua taratibu mwanzoni, lakini kwa muda mrefu huleta matokeo makubwa sana. Utajiri mkubwa si matokeo ya “mbinu ya siri ya uwekezaji,” bali ya kutumia muda mrefu. Siri kubwa ya mafanikio ya kifedha: anza mapema, endelea bila kusimama, acha muda ufanye kazi yake. Nukuu ya mwisho ya mwandishi: “<i>Compounding</i> inashangaza kwa sababu inahitaji muda mrefu sana kufanya kazi, lakini matokeo yake yanaweza kuwa makubwa zaidi ya kitu kingine chochote cha kifedha.”</p>"
+}
+,
+      {
+  "id": "ch5",
+  "number": 5,
+  "title": "📖 SURA YA 5: KUPATA UTAJIRI DHIDI YA KUDUMISHA UTAJIRI (Getting Wealthy vs. Staying Wealthy)",
+  "tags": [
+    "utajiri",
+    "nidhamu",
+    "hatari",
+    "udumishaji"
+  ],
+  "time": "Dakika ~15 kusoma",
+  "quotes": [
+    "Kuhifadhi utajiri ni tofauti na kuupata. Kudumu kunategemea mambo matatu: unyonge, hofu ya kiasi, na uvumilivu wa kutojaribu kuharibu kila kitu.",
+    "Kupata pesa kunahitaji ujasiri. Kudumisha pesa kunahitaji unyenyekevu."
+  ],
+  "comments": [
+    "Getting Wealthy vs Staying Wealthy ni michezo miwili tofauti.",
+    "Unyenyekevu na hofu ndio silaha kuu za kudumisha utajiri.",
+    "Jesse Livermore: Alipata bilioni, akapoteza kila kitu kwa sababu hakuweza 'kudumisha'."
+  ],
+  "body": "<h3><span style='color: #FFC107;'>Dhamira Kuu ya Mwandishi</span></h3><p class='dropcap'>Kupata pesa (<i>getting wealthy</i>) mara nyingi kunahitaji uongozi, ujasiri, na mara nyingine hata kuchukua hatari kubwa. Lakini kudumisha pesa (<i>staying wealthy</i>) kunahitaji unyenyekevu, uoga wa kiasi, na nidhamu ya kujizuia. Mambo haya mawili mara nyingi ni kinyume, ndiyo maana watu wengi wanaoweza kupata utajiri hukwama wanapojaribu kuudumisha. Mwandishi anasema: 'Kuhifadhi utajiri ni tofauti na kuupata. Kudumu kunategemea mambo matatu: unyenyekevu, hofu ya kiasi, na uvumilivu wa kutojaribu kuharibu kila kitu.'</p><h3><span style='color: #2196F3;'>Mfano wa Jesse Livermore – Mtu Aliyepata na Kupoteza</span></h3><p><b>Nani alikuwa Jesse Livermore?</b> Jesse Livermore alikuwa mfanyabiashara wa hisa (<i>stock trader</i>) maarufu sana katika karne ya 20. Aliitwa “Boy Plunger” kwa sababu alipata utajiri mkubwa kwa kubashiri hisa kwa ujasiri mkubwa. <b>Tukio la 1929 – Bahati kubwa:</b> Wakati wa <i>Great Depression</i> (kuanguka kwa masoko ya hisa mwaka 1929), watu wengi walipoteza kila kitu. Lakini Jesse Livermore alibashiri kwamba soko litaanguka na akawa sahihi. Katika siku chache tu, alipata zaidi ya $3 bilioni kwa viwango vya sasa. Hivyo alionekana shujaa, kipaji, “bora kuliko wote.” <b>Baada ya hapo – Maanguko:</b> Lakini baadaye, alipojiamini mno, aliendelea kubashiri bila kujizuia. Hatimaye alipoteza kila kitu, mali zake, familia yake, na heshima yake. Mwaka 1940, alijiua kwa bastola hotelini akiwa maskini. Ujumbe: Kumekuwa na watu wengi waliofanikiwa kupata utajiri, lakini wachache sana walioweza kudumu nao.</p><h3><span style='color: #F44336;'>Kupata vs Kudumisha – Tofauti za Kimsingi</span></h3><p><b>Kupata utajiri (<i>Getting wealthy</i>):</b></p><ul><li>Inahitaji kuchukua hatari kubwa.</li><li>Inahitaji kuwa na ujasiri.</li><li>Inahitaji kujiamini sana.</li><li>Ni mchezo wa kufikiria mbele, kujaribu, na kutafuta nafasi mpya.</li></ul><p><b>Kudumisha utajiri (<i>Staying wealthy</i>):</b></p><ul><li>Inahitaji kuwa na hofu ya kiasi (<i>conservative fear</i>) – kuamini kwamba mambo yanaweza kwenda vibaya kesho.</li><li>Inahitaji kujilinda dhidi ya kupoteza.</li><li>Inahitaji uvumilivu wa kutofanya mambo ya ajabu ili kupata zaidi.</li><li>Ni mchezo wa kujizuia na kutosahau kwamba bahati na hatari huja bila kutarajiwa.</li></ul><h3><span style='color: #9C27B0;'>Kanuni Tatu za Kudumisha Utajiri</span></h3><p>Mwandishi anasema kudumisha utajiri kunategemea mambo matatu makuu:</p><ol><li><b>Unyenyekevu (<i>frugality/humility</i>):</b> Tambua kwamba mambo yanaweza kubadilika haraka. Usijione wewe ni mwerevu zaidi kuliko wengine. Kubali kwamba nafasi ya bahati ndiyo ilikupa sehemu ya mafanikio yako.</li><li><b>Hofu ya kiasi (<i>fear</i>):</b> Kuwa na woga wa “kesho mambo yanaweza kwenda vibaya.” Hofu hii inakusaidia kutengeneza akiba, bima, na kulinda uwekezaji. Usifanye maamuzi kwa kuamini hali nzuri ya sasa itadumu milele.</li><li><b>Uvumilivu wa kutoharibu (<i>restraint</i>):</b> Usijaribu mara zote kuwa “mwerevu zaidi” au “tajiri zaidi” kwa kuchukua hatari zisizohitajika. Kataa tamaa ya kupata faida kubwa sana haraka. Kumbuka kwamba kulinda ulivyo nacho ni bora kuliko kuvutia zaidi.</li></ol><h3><span style='color: #E91E63;'>Mifano ya Maisha Halisi</span></h3><p><b>Mfano wa kampuni kubwa:</b> Kuna kampuni nyingi zilizoongoza masoko kwa miaka 10–20, lakini zikafa kwa sababu zilidhani zitatawala milele. Mfano: <b>Kodak</b> ilidharau kamera za digital. <b>Nokia</b> ilidharau simu janja. Wote walikuwa na mali, nguvu, na nafasi, lakini hawakudumisha kwa sababu walikosa unyenyekevu na woga wa kutosha. <b>Mfano wa mtu binafsi:</b> Mtu anaweza kuanza kwa kuwekeza kwa tahadhari, akapata mamilioni. Lakini akishapata, anaweza kuanza kubashiri zaidi, akitaka faida kubwa zaidi. Mwishowe anapoteza kila kitu – si kwa sababu hakuwa na akili, bali kwa sababu hakutofautisha kati ya kupata na kudumisha.</p><h3><span style='color: #03A9F4;'>Mafundisho ya Kisaikolojia</span></h3><p>Binadamu hufikiria kuwa kupata pesa na kudumisha pesa ni ujuzi uleule. Lakini sivyo. Mara nyingi watu wanapopata utajiri, wanaendelea kutumia akili za “kupata” badala ya “kulinda.” Matokeo yake wanapoteza walichopata.</p><h3><span style='color: #E91E63;'>Nukuu Muhimu za Mwandishi</span></h3><ul><li>“Unapaswa kuwa na mchanganyiko wa tamaa na hofu. Tamaa ya kupata utajiri. Hofu ya kuupoteza.”</li><li>“Kuna watu wengi walioweza kupata pesa, lakini idadi ni ndogo mno ya walioweza kudumu nazo.”</li><li>“Kujua kutosha kukusaidia kupata utajiri ni kitu kimoja. Kujua kutosha kukusaidia kudumu nao ni kitu kingine.”</li></ul><h3><span style='color: #F44336;'>Hitimisho la Sura ya 5</span></h3><p>Kupata utajiri na kudumisha utajiri ni michezo miwili tofauti. Kupata pesa → inahitaji hatari na ujasiri. Kudumisha pesa → inahitaji hofu na uvumilivu. Unyenyekevu, hofu ya kiasi, na uvumilivu ndio nguzo za kudumisha mali. Tamaa ya kutaka zaidi mara nyingi huharibu utajiri uliopatikana. Mshindi si yule aliyeupata utajiri pekee, bali yule aliyeweza kudumu nao kwa muda mrefu. Nukuu ya mwisho ya mwandishi kwa sura hii: “Unachohitaji si ustadi wa juu wa kifedha, bali ni uelewa kwamba mambo yanaweza kubadilika ghafla, na kwa hiyo unajenga kinga ya kukuweka hai. Kumbuka, kushinda mchezo huu si lazima uwe bora zaidi, bali ni lazima uendelee kuwepo muda mrefu zaidi.”</p>"
+}
+,
+      {
+  "id": "ch6",
+  "number": 6,
+  "title": "📖 SURA YA 6: TAILS, YOU WIN (Matokeo Makubwa Hutokana na Upande wa Mkia – Si Wastani)",
+  "tags": [
+    "tails",
+    "mafanikio",
+    "hatari",
+    "uvumilivu",
+    "ushindi"
+  ],
+  "time": "Dakika ~12 kusoma",
+  "quotes": [
+    "Siri ya mafanikio si kuwa sahihi kila wakati, bali kuwa sahihi mara chache kwenye mambo makubwa.",
+    "Utajiri wa Buffett si matokeo ya kushinda kila mara, bali ni matokeo ya machache aliyoshinda sana.",
+    "Tails events hufanya matokeo ya kifedha yawe ya ajabu: matukio machache huunda historia nzima."
+  ],
+  "comments": [
+    "Venture Capital (VC) ni mfano mzuri wa tails: Kampuni nyingi hufa, lakini moja tu inaweza kulipa hasara zote.",
+    "Kuvumilia kushindwa mara nyingi ni ufunguo wa ushindi mkubwa.",
+    "Makosa na kushindwa mara nyingi si tatizo – ni gharama ya kupata nafasi ya ushindi mkubwa."
+  ],
+  "body": "<h3><span style='color: #FFC107;'>Dhamira Kuu</span></h3><p class='dropcap'>Mwandishi anasema: Katika uwekezaji na hata maisha, matokeo makubwa mara nyingi hutokana na matukio machache yasiyo ya kawaida (<i>tails</i>). Huwezi kupata mafanikio makubwa kwa kufanya mambo yote kwa usawa; badala yake, unahitaji kuvumilia makosa mengi na kushindwa mara nyingi, kwa sababu matukio machache ya ajabu ndiyo yanayobadilisha kila kitu. Ujumbe mkuu ni kwamba: 'Siri ya mafanikio si kuwa sahihi kila wakati, bali kuwa sahihi mara chache kwenye mambo makubwa.'</p><h3><span style='color: #2196F3;'>Mfano wa Venture Capital – Mtindo wa 80/20</span></h3><p>Katika uwekezaji wa <i>venture capital</i> (VC), kampuni nyingi wanazowekeza hupotea, lakini wachache tu (labda 5%–10%) hupata mafanikio makubwa sana na kulipia makosa yote. Mfano: Uwekezaji mmoja kama WhatsApp (uliofanywa na Sequoia Capital na kuuzwa kwa Facebook kwa $19 bilioni) ulilipa mabilioni na kulipa hasara za mamia ya kampuni nyingine zilizoshindwa. Ujumbe: Sio lazima uwe sahihi mara nyingi. Unahitaji tu kuwa sahihi mara chache sana kwenye mambo makubwa.</p><h3><span style='color: #F44336;'>Mfano wa Warren Buffett na Tails</span></h3><p>Buffett anamiliki zaidi ya kampuni 400 kupitia Berkshire Hathaway. Lakini, utafiti unaonyesha kuwa karibu 10 ya hisa alizonunua ndizo zimetengeneza zaidi ya 90% ya utajiri wake wote. Kwa mfano, uwekezaji kwenye Coca-Cola, American Express, Apple ndio umemjengea mabilioni. Ujumbe: Utajiri wa Buffett si matokeo ya kushinda kila mara, bali ni matokeo ya matukio machache aliyoshinda sana.</p><h3><span style='color: #9C27B0;'>Mfano Kutoka Sayansi na Ubunifu</span></h3><p><b>Thomas Edison</b> aliunda zaidi ya uvumbuzi 1,000, lakini ni michache tu (taa ya umeme, <i>phonograph</i>, <i>motion pictures</i>) iliyomfanya aingie kwenye historia. Katika biolojia, spishi nyingi zinatoweka, lakini spishi chache zinazofanikiwa kubeba vinasaba bora ndizo zinazoendeleza maisha. Hata makampuni ya teknolojia kama Google, Facebook, Amazon, Apple, Microsoft ni wachache waliobeba mabilioni ya thamani ya soko, huku maelfu ya <i>startups</i> zikishindwa na kusahaulika. Ujumbe: Hata sayansi na asili hufuata kanuni ya '<i>tail events</i>' – mafanikio machache huchukua nafasi kubwa.</p><h3><span style='color: #E91E63;'>Mifano ya Maisha ya Kila Siku</span></h3><p>Katika maisha yako binafsi, mara nyingi mambo machache makubwa huchora mstari mzima wa maisha: chuo kimoja ulichosoma, kazi moja uliyopata, mtu mmoja uliyemuoa au kuolewa, au rafiki mmoja aliyekupa nafasi fulani. Mambo mengine mengi ni madogo madogo, lakini haya machache hugeuza mustakabali wako.</p><h3><span style='color: #03A9F4;'>Mafundisho ya Kisaikolojia</span></h3><p>Kuvumilia kushindwa mara nyingi ni ufunguo wa ushindi mkubwa. Watu wengi hukata tamaa haraka wakishindwa mara chache. Lakini uwekezaji na ubunifu ni mchezo wa uvumilivu hadi upate moja kubwa. Usione hasara ndogo ndogo kama kushindwa – ni gharama ya kupata nafasi ya <i>tail events</i>. Usijidanganye kwa kujaribu kuwa sahihi kila wakati, kwa sababu hakuna anayeweza. Kinachohesabika ni kuendelea kusalia kwenye mchezo hadi “<i>tail event</i>” ikuje upande wako.</p><h3><span style='color: #4CAF50;'>Hitimisho la Sura ya 6</span></h3><p>Mafanikio makubwa yanategemea “<i>tail events</i>” – matukio machache yasiyo ya kawaida. Huwezi kuwa sahihi kila wakati – lakini unahitaji tu kuwa sahihi mara chache kwenye mambo makubwa. Makosa na kushindwa mara nyingi si tatizo – ni gharama ya kupata nafasi ya ushindi mkubwa. Kuvumilia na kusalia kwenye mchezo muda mrefu ndicho kinachokuwezesha kukutana na “<i>tail event</i>.” Nukuu ya mwisho ya mwandishi kwa sura hii: 'Kitu chochote kikubwa – kampuni, uwekezaji, uvumbuzi, uhusiano – mara nyingi hutokana na <i>tail events</i>. Ni nadra sana, lakini mara zinapojitokeza, ndizo zinazoandika historia. <i>Tail events, you win.</i>'</p>"
+}
+,
+      { id:'ch7', number:7, title:"Uhuru (Freedom)", tags:['happiness','control','time'], time:'Dakika ~10 kusoma', quotes:[ 'Controlling your time is the highest dividend money pays.', 'Using your money to buy time and options has a lifestyle benefit few luxury goods can compete with.' ], comments:[ 'Pesa ina thamani ya juu zaidi kwa kutoa udhibiti wa muda wako.', 'Fanya kazi unayoipenda, kwa masharti yako. Unafanya kazi kwa sababu unataka, siyo kwa sababu unahitaji.' ], body:`<p class='dropcap'>Sura hii inaweka wazi kwamba thamani ya juu zaidi ya pesa siyo katika vitu inavyoweza kununua, bali ni uwezo wake wa kukupa **udhibiti juu ya muda wako**. Kulingana na mwanasaikolojia Angus Campbell, udhibiti wa maisha ni utabiri wa kuaminika zaidi wa furaha kuliko kipato au ukubwa wa nyumba. Mwandishi anasimulia uzoefu wake mwenyewe kama mfanyabiashara wa uwekezaji, ambapo licha ya mshahara mkubwa, aliacha kazi kwa sababu hakuwa na udhibiti wa muda wake.</p><h3>Kununua Uhuru, Siyo Anasa</h3><p>Mwandishi anasisitiza kuwa matumizi bora ya pesa ni kununua uhuru na chaguzi (options). Fedha kidogo benki inaweza kukupa uwezo wa kuchukua siku kadhaa za mapumziko bila hofu. Akiba ya miezi sita inaweza kukuwezesha kungojea kazi nzuri badala ya kukubali kazi ya kwanza utakayoipata. Hatimaye, akiba kubwa zaidi inakuwezesha kustaafu mapema, kabla ya kulazimika kufanya hivyo. Hii ni faida isiyoonekana ya utajiri—thamani ya kuwa na uwezo wa kusema, "Ninaweza kufanya chochote ninachotaka leo".</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Utafiti wa Karl Pillemer wa kuwahoji wazee unathibitisha hili: Hakuna hata mmoja aliyesema furaha inatokana na kujipatia mali au kulinganisha na wengine. Walithamini zaidi uhusiano, kuwa sehemu ya kitu kikubwa, na muda wa familia.</p></div><h3>Uchumi wa Maamuzi</h3><p>Mwandishi anaeleza jinsi uchumi umebadilika kutoka kazi za kutumia misuli hadi kazi za kutumia akili, kama zile za John D. Rockefeller. Kazi za leo zinakufuata nyumbani kwa sababu "zana" yako (akili yako) haibaki ofisini. Hii inaongeza hisia ya kutokuwa na udhibiti, licha ya mapato ya juu. Njia ya kukabiliana na hili ni kutumia pesa kujenga mipaka, na hivyo kurudisha udhibiti.</p>` },
+      { id:'ch8', number:8, title:"Paradoksi ya Mtu Kwenye Gari (Man in the Car Paradox)", tags:['ego','admiration','humility'], time:'Dakika ~6 kusoma', quotes:[ 'No one is impressed with your possessions as much as you are.', 'Humility, kindness, and empathy will bring you more respect than horsepower ever will.' ], comments:[ 'Unadhani wengine wanakuvutiwa wewe, kumbe wanatazama gari yako na kujifikiria wao wakiwa nayo.', 'Lengo la kweli ni kuheshimiwa na kupendwa, sio kuvutia wivu.' ], body:`<p class='dropcap'>Kila mtu anapenda kuvutiwa. Unaponunua gari la kifahari, unadhani unajenga hisia ya "huyu mtu ni muhimu, ana akili, na ana ladha nzuri" kwa wengine. Lakini mwandishi anasema ukweli mchungu: hakuna anayekuangalia wewe. Badala yake, wanafikiri, "Kama ningekuwa na gari hilo, watu ningenifikiria mimi kuwa 'cool' ". Hii ndiyo **paradoksi ya mtu kwenye gari**. Unatafuta sifa, lakini matendo yako yanaishia kuwawekea wengine viwango vya kuigwa, huku wewe ukipuuzwa.</p><h3>Acha Ego, Fanya Kilicho Sahihi</h3><p>Mwandishi anasisitiza kwamba watu wanatamani heshima na kupendwa. Hata hivyo, mara nyingi wanatumia pesa kununua vitu vinavyowapa tu hisia ya muda ya umuhimu. Njia bora zaidi ya kupata heshima ni kupitia tabia kama vile <strong>unyenyekevu, wema, na uelewa</strong>. Hivi ndivyo vitu vinavyoleta uhusiano wa kweli na heshima ya kudumu, tofauti na anasa za muda mfupi.</p>` },
+      { id:'ch9', number:9, title:"Utajiri Ni Kile Usichokiona (Wealth is What You Don't See)", tags:['wealth','spending','frugality'], time:'Dakika ~7 kusoma', quotes:[ 'Spending money to show people how much money you have is the fastest way to have less money.', 'Wealth is income not spent.' ], comments:[ 'Utajiri huonekana katika vitu ambavyo <em>hujanunua</em>.', 'Ili kuwa tajiri, lazima ufanye kinyume na vile watu wanavyofikiri.' ], body:`<p class='dropcap'>Sura hii inachunguza dhana kwamba utajiri wa kweli hauwezi kuonekana. Ni hali ya kifedha iliyojengwa kimya kimya. Watu wanapopita na gari la kifahari, wewe huona gari na kudhani mmiliki ni tajiri, ilhali anaweza kuwa anaishi kwa madeni. Mwandishi anasema, **"Utajiri ni fedha ambayo haijatumika"**. Ni uwekezaji, akiba, na mali nyingine zisizoonekana, ambazo zimejengwa kwa ajili ya mustakabali.</p><h3>Kutaka Kuwa Milionea vs. Kutaka Kutumia Milioni</h3><p>Kosa kubwa la watu wengi ni kwamba wanaposema wanataka kuwa milionea, wanamaanisha "nataka kutumia milioni moja". Hili ni kinyume kabisa cha kuwa milionea. Kuwa tajiri kunahitaji <strong>ujizuiaji (self-control)</strong>, kuacha anasa za muda mfupi ili kujenga utajiri wa kudumu. Mwandishi anatumia mfano wa mazoezi na kupunguza uzito: unajisikia vizuri baada ya kufanya kazi, lakini lazima ujizuie kula ili kupunguza uzito kweli.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Utajiri ni vigumu kujifunza kwa kuiga, kwa sababu hauwezi kuonekana. Ronald Read, janitor ambaye alikuwa milionea wa dola 8, hakuna aliyemuiga wakati wa uhai wake kwa sababu utajiri wake ulikuwa umefichwa.</p></div><p>Kwa kumalizia, mwandishi anaeleza kuwa ulimwengu umejaa watu wanaojinyima lakini ni matajiri wa kweli, na wale wanaojiita matajiri lakini wanaishi kwa madeni.</p>` },
+      { id:'ch10', number:10, title:"Hifadhi Pesa (Save Money)", tags:['saving','control','humility'], time:'Dakika ~10 kusoma', quotes:[ 'Building wealth has little to do with your income or investment returns, and lots to do with your savings rate.', 'The only factor you can control generates one of the only things that matters. How wonderful.' ], comments:[ 'Saving is a hedge against life’s inevitable ability to surprise the hell out of you at the worst possible moment.', 'Humility is a key driver of saving.' ], body:`<p class='dropcap'>Mwandishi anasema uwezo wa kujenga utajiri hautokani na kiasi gani unachopata au faida ya uwekezaji wako, bali ni kiasi gani unachohifadhi. Anatoa mfano wa shida ya mafuta ya miaka ya 1970. Badala ya kupata mafuta zaidi, ulimwengu ulikwepa shida hiyo kwa kujenga magari na viwanda vyenye ufanisi zaidi wa nishati. Ufanisi huu ulikuwa jambo ambalo watu walikuwa na uwezo wa kulidhibiti. Kadhalika, kiasi gani unaokoa ni jambo unaloweza kudhibiti, tofauti na mapato ya uwekezaji ambayo hayako kwenye udhibiti wako.</p><h3>Kudhibiti Matarajio</h3><p>Mwandishi anasema thamani ya utajiri inahusiana na kile unachohitaji. Mtu anayeweza kuridhika na kipato kidogo ana faida zaidi ya yule anayepata faida kubwa lakini matumizi yake yanakua sambamba na mapato.</p><p>Hivyo, ufunguo wa kuongeza akiba yako siyo lazima kuongeza kipato chako, bali ni kupunguza matumizi yako. Mara nyingi, matumizi ya kifahari ni matokeo ya **ego** inayotaka kuonyesha uwezo wake. Wale waliofanikiwa kifedha mara nyingi hawajali maoni ya wengine juu ya maisha yao.</p><h3>Kuokoa Kwa Ajili ya Yasiyotabirika</h3><p>Hifadhi pesa sio tu kwa ajili ya malengo maalum kama nyumba au kustaafu. Inapaswa kuwa **"kinga dhidi ya mambo yasiyotabirika"**. Uwezekano wa matukio ya ghafla, kama vile matibabu au kupoteza kazi, huongeza thamani ya akiba ya ghafla. Mwandishi anasema, 'Faida ya fedha taslimu isiyopangwa kwa jambo maalum ni uwezo wake wa kukupa **uhuru**'. Uhuru huo wa kubadilisha kazi, kustaafu mapema, au kungoja fursa bora, ni faida isiyopimika.</p>` },
+      { id:'ch11', number:11, title:"Kufanya Jambo Linalowezekana > Kufanya Jambo Lenye Mantiki (Reasonable > Rational)", tags:['behavioral finance','endurance','psychology'], time:'Dakika ~10 kusoma', quotes:[ 'Do not aim to be coldly rational when making financial decisions. Aim to just be pretty reasonable.', 'Reasonable is more realistic and you have a better chance of sticking with it for the long run.' ], comments:[ 'Kufanya uamuzi unaowezekana ni bora kuliko ule wenye mantiki, kwa sababu uwezekano wa kuendelea nao ni mkubwa.', 'Hisia huathiri maamuzi ya kifedha.' ], body:`<p class='dropcap'>Sura hii inasisitiza kwamba maamuzi ya kifedha hayafanywi na karatasi za hesabu (spreadsheets), bali na watu wenye hisia na hisia hizo huathiri matendo yao. Mwandishi anasema unapaswa kutofanya uamuzi uliokwisha pangwa na akili tu (rational), bali uamuzi unaowezekana (reasonable) unaofaa maisha yako na hali ya kihisia. Anatoa mfano wa daktari Julius Wagner-Jauregg, ambaye alishinda Nobel kwa kutibu ugonjwa wa kaswende kwa kuleta homa bandia. Ingawa ilikuwa ya kimantiki (rational), matibabu haya hayakuwa ya kuwezekana kwa wagonjwa wengi kwa sababu homa ilikuwa chungu. Vivyo hivyo, mikakati mingi ya kifedha iliyo na 'mantiki' kwenye karatasi, haitekelezeki maishani kwa sababu inapuuzia hisia za binadamu.</p><h3>Kuvumilia Kwa Ujasiri</h3><p>Mwandishi anasema uwezo wa kushikamana na mkakati wa uwekezaji ni muhimu zaidi ya ubora wa mkakati wenyewe. Uwekezaji mzuri una hitaji la kuvumilia vipindi vigumu. Mkakati mzuri ni ule unaokupa uwezo wa **kuvumilia**, na siyo ule unaokuahidi faida kubwa sana lakini unakushinikiza kihisia hadi unashindwa kuendelea. Hii ndiyo maana ni muhimu kuwekeza kwenye vitu unavyovipenda au unavyoviamini, kwa sababu itakuwa rahisi kwako kuvumilia wakati mgumu.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Uwekezaji una mantiki ni ule unaopunguza 'majuto ya baadaye'. Mshindi wa Nobel Harry Markowitz aligawanya uwekezaji wake 50/50 kati ya hisa na bonds kwa sababu hakutaka majuto ya soko likipanda au kushuka. Hii haikuwa ya kimantiki, lakini ilikuwa ya kuwezekana kwake.</p></div>` },
+      { id:'ch12', number:12, title:"Mshangao! (Surprise!)", tags:['history','prediction','unprecedented'], time:'Dakika ~10 kusoma', quotes:[ 'Things that have never happened before happen all the time.', 'History is the study of change, ironically used as a map of the future.' ], comments:[ 'Historia siyo ramani ya mustakabali; ni mwongozo.', 'Matukio ya mkia (tail events) husababisha mabadiliko makubwa kuliko tunavyofikiri.' ], body:`<p class='dropcap'>Mwandishi anatoa mfano wa misiba isiyotabirika kama Shambulio la Septemba 11, ambalo lilisababisha mlolongo wa matukio ya kiuchumi hadi leo, ikiwemo kuongezeka kwa madeni ya wanafunzi. Matukio ya kipekee kama hayo, yanayoitwa **"matukio ya mkia"**, ndiyo yanayoathiri sana uchumi na maisha ya watu.</p><h3>Mabadiliko ya Kimuundo (Structural Changes)</h3><p>Pia, historia haitoi mwongozo sahihi kwa sababu mabadiliko ya kimuundo huufanya ulimwengu wa leo kuwa tofauti na ule wa zamani. Mfano: 401(k) (mpango wa kustaafu) uliibuka miaka ya 1970. Hii inamaanisha historia ya 'kuwekeza kwa kustaafu' haipo kwa muda mrefu kama tunavyofikiri. Vilevile, idadi ya mdororo wa kiuchumi nchini Marekani imebadilika kwa kiasi kikubwa. Sheria za uhasibu na muundo wa sekta pia vimebadilika, na kufanya ushauri wa uwekezaji wa Benjamin Graham wa miaka 40 iliyopita kutokuwa na maana leo.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema kuna tofauti kubwa kati ya kuwa mwenye akili (akili ya kutabiri) na kuwa sahihi. Ni muhimu kutumia historia kwa ajili ya kanuni pana, kama vile ulafi na hofu, lakini si kwa ajili ya 'kunakili' matukio maalum.</p></div><p>Kwa kumalizia, mwandishi anasema somo sahihi la kujifunza kutoka kwa mshangao siyo kutabiri nini kitatokea ijayo, bali ni kukubali kwamba ulimwengu ni wa kushangaza na hakuna anayejua nini kitatokea.</p>` },
+      { id:'ch13', number:13, title:"Nafasi kwa Ajili ya Makosa (Room for Error)", tags:['margin of safety','risk','planning'], time:'Dakika ~11 kusoma', quotes:[ 'The most important part of every plan is planning on your plan not going according to plan.', 'The single point of failure is a threat to everything.' ], comments:[ 'Nafasi ya makosa ni muhimu kuliko kuwa na mantiki.', 'Panga ili uweze kuishi (survive) hata kama mkakati wako utaharibika.' ], body:`<p class='dropcap'>Nafasi ya makosa (au 'margin of safety') ni moja ya dhana muhimu zaidi katika fedha. Mwandishi anatumia mfano wa wachezaji wa blackjack wanaoweka hesabu za karata. Wanajua hawawezi kushinda kila mara, hivyo hawaweki dau kubwa hata kama wana uhakika wa kushinda. Hii inawapa uwezo wa kuvumilia kushindwa mara chache na kubaki kwenye mchezo. Ndivyo ilivyo katika maisha na fedha.</p><h3>Kuepuka Kuangamizwa</h3><p>Mwandishi anaeleza kuwa **hakuna hatari inayofaa kuchukuliwa, ikiwa inaweza kusababisha kuangamizwa kabisa**. Anatumia mfano wa kucheza Russian roulette. Ingawa una uwezekano mkubwa wa kushinda, hatari ya kupoteza ni kubwa sana kiasi kwamba haifai. Vilevile, maamuzi ya kifedha yanayokufanya uhusike na 'single points of failure' yanapaswa kuepukwa. Mfano, kutegemea mshahara pekee bila akiba yoyote kunaweza kuwa hatari kubwa.</p><div class='ribbon bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl shadow-soft'><p class='m-0'>Mwandishi anasisitiza kuwa nafasi ya makosa haina uhusiano na kuwa mhafidhina. Badala yake, ni njia ya kukupa uwezo wa kuishi kipindi cha matukio yasiyotabirika, ili uweze kunufaika na matukio chanya ya muda mrefu. Inahusu kuongeza uwezekano wa kuishi.</p></div><p><strong>Bill Gates</strong> alitumia mantiki hii wakati wa kuanzisha Microsoft. Lengo lake lilikuwa kwanza kuhakikisha kampuni haiwezi kufa, na kisha kufanikiwa. Hii ni tofauti na mikakati mingi ya leo, inayolenga faida kubwa bila kujali hatari ya kupoteza. Kuwa na akiba ya kutosha inakupa nafasi ya kuepuka maamuzi ya ghafla, na pia inakupa 'njia ya kutoka' wakati mipango inapoenda vibaya.</p>` },
+      { id:'ch14', number:14, title:"Utapitia Mabadiliko (You'll Change)", tags:['personal growth','planning','regret'], time:'Dakika ~8 kusoma', quotes:[ 'Long-term planning is harder than it seems because people’s goals and desires change over time.', 'We are prisoners to our past, different, selves.' ], comments:[ 'Ni rahisi kupanga mipango kwa ajili ya "wewe wa baadaye", lakini wewe huyo utabadilika sana.', 'Lengo siyo kuwa na mpango mmoja wa maisha, bali kubadilika na maisha.' ], body:`<p class='dropcap'>Sura hii inazungumzia changamoto ya kupanga mipango ya muda mrefu ya kifedha. Mwandishi anasema watu ni wabashiri duni wa "watu wa baadaye". Tunapofanya maamuzi leo, kama vile kuchagua kazi au kiasi cha kuwekeza, tunafanya hivyo kwa kuamini tunajua tunachotaka katika siku zijazo. Lakini hisia zetu, mahusiano, na matamanio yetu hubadilika sana baada ya muda. Mwandishi anatoa mfano wa rafiki yake ambaye alifanya kazi kwa bidii kuwa daktari, lakini miaka mingi baadaye alichukia sana kazi yake kutokana na presha.</p><h3>Kudanganya Ubongo Wako</h3><p>Wanasikolojia wanaita hii **"Udanganyifu wa Mwisho wa Historia" (End of History Illusion)**, ambapo tunaamini tumebadilika sana zamani lakini hatutabadilika tena siku zijazo. Hali hii inafanya kupanga maisha kwa miaka 80 kuwa ngumu. Mwandishi anapendekeza kuwa na malengo yanayowezekana, yasiyotegemea tu kazi au fedha, kama vile kuwa na muda wa kutosha na familia na marafiki.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema, "Unapaswa kuacha mipango ya kifedha iliyofanywa na wewe wa zamani bila huruma, badala ya kuiweka kwenye 'mashine ya kusaidia maisha' na kuivuta". Hii inamaanisha kukubali mabadiliko na kufanya maamuzi mapya yanayolingana na wewe wa leo.</p></div>` },
+      { id:'ch15', number:15, title:"Hakuna Kitu Bure (Nothing's Free)", tags:['fees','cost of success','volatility'], time:'Dakika ~10 kusoma', quotes:[ 'Everything has a price, but not all prices appear on labels.', 'The inability to pay the price of success is the main reason for failure.' ], comments:[ 'Bei ya mafanikio katika soko la hisa siyo dola, ni hali ya kutokuwa na uhakika, wasiwasi, na majuto.', 'Usijaribu kupata faida bila kulipa bei.' ], body:`<p class='dropcap'>Sura hii inaeleza kwamba kila kitu katika fedha, kama ilivyo maishani, kina gharama yake. Lakini tatizo ni kwamba mara nyingi bei ya vitu muhimu, hasa katika uwekezaji, haionekani kwenye lebo. Mwandishi anasema bei ya mafanikio katika soko la hisa siyo dola, bali ni **mabadiliko (volatility), hofu, mashaka, na majuto**. Hivi ndivyo ada unayolipa ili kupata faida ya muda mrefu. Mwandishi anasema unapaswa kulipa ada hiyo na kuikubali kama sehemu ya mchezo. Anasisitiza kuwa jaribio la kukwepa ada hii ndio chanzo cha kushindwa.</p><h3>Ada, Siyo Faini</h3><p>Mwandishi anatumia mfano wa watalii Disneyland. Watu wengi wanakubali kulipa $100 kwa tiketi, kwa sababu wanaona thamani ya furaha wanayoipata. Wanaikubali kama ada. Vivyo hivyo, mabadiliko ya soko na misukosuko inapaswa kuonekana kama **ada ya kuingia** ili kufurahia faida ya muda mrefu, na siyo kama faini. Mwandishi anasema ni ujinga kujaribu kuiba gari la kifahari kwa kuendesha bila kulipa. Watu wanaojaribu kufanya hivyo, kama vile kutabiri soko au kufanya biashara fupi fupi, mara nyingi huishia kupoteza.</p><div class='ribbon bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl shadow-soft'><p class='m-0'>Makosa ya Jeffrey Immelt (CEO wa GE) na Jack Welch yalikuwa kujaribu kutoa faida kubwa bila kulipa ada ya ukosefu wa uhakika. Walijaribu 'kulainisha' mapato, lakini mwishowe bili ilikuja ikiwa kubwa zaidi.</p></div>` },
+      { id:'ch16', number:16, title:"Wewe na Mimi (You & Me)", tags:['time horizon','social comparison','investing game'], time:'Dakika ~10 kusoma', quotes:[ 'Beware taking financial cues from people playing a different game than you are.', 'An iron rule of finance is that money chases returns to the greatest extent that it can.' ], body:`<p class='dropcap'>Mwandishi anaeleza kuwa makosa makubwa ya kifedha, kama vile kununua hisa za 'bubble' (bubble stock), hutokea kwa sababu wawekezaji huangalia wengine wanaocheza mchezo tofauti na wao, na kuiga bila kufikiri. Mtu anayewekeza kwa ajili ya kustaafu miaka 30 ijayo ana malengo tofauti kabisa na mfanyabiashara wa kila siku (day trader). Soko linaweza kuonekana kuwa na bei isiyo ya kawaida, lakini bei hiyo inaweza kuwa ya kimantiki kwa yule anayecheza mchezo tofauti. **Matukio ya 'bubble'** hutokea wakati wawekezaji wa muda mfupi wanapojiunga na soko, wakifuatilia faida fupi fupi na kupuuza thamani ya muda mrefu. Hali hii inawavutia wawekezaji wa muda mrefu, ambao huishia kuumia.</p><h3>Kujua Mchezo Wako</h3><p>Mwandishi anasisitiza umuhimu wa **kujua na kushikamana na mchezo wako wa kifedha**. Hii inamaanisha kuandika malengo yako wazi, muda wako wa uwekezaji, na uvumilivu wako. Kuwa na maono haya kunakusaidia kupuuza kelele za soko na maoni ya wengine ambao wanaweza kuwa na malengo tofauti. Soko la hisa lina wawekezaji wenye malengo tofauti, na kuwafananisha wote ni kosa kubwa.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema: **"An anchor of psychology is not realizing that rational people can see the world differently"**. Watu wenye akili wanaweza kufanya maamuzi yanayoonekana ya kushangaza kwa sababu wanashughulikia mambo kutoka kwa mchezo tofauti kabisa, na kuangalia vitu tofauti.</p></div>` },
+      { id:'ch17', number:17, title:"Ushawishi wa Uhasama (The Seduction of Pessimism)", tags:['optimism','pessimism','media bias'], time:'Dakika ~11 kusoma', quotes:[ 'Optimism sounds like a sales pitch. Pessimism sounds like someone trying to help you.', 'Organisms that treat threats as more urgent than opportunities have a better chance to survive and reproduce.' ], comments:[ 'Uhasama (Pessimism) huvutia zaidi kwa sababu unaonekana kuwa wa busara na wenye umakini.', 'Matumaini (Optimism) hayamaanishi kila kitu kitakwenda vizuri, bali uwezekano wa matokeo mazuri upo kwa muda mrefu.' ], body:`<p class='dropcap'>Sura hii inachunguza kwa nini uhasama (pessimism) ni wa kuvutia sana katika masuala ya kifedha na kwa nini watu wanafurahia kusikia kwamba mambo yanaenda vibaya. Mwandishi anasema uhasama unaonekana kuwa wa busara na wenye akili, ilhali matumaini (optimism) mara nyingi yanaonekana kama maneno ya kuuza. Sehemu ya hii inatokana na silika za binadamu: tunatilia maanani sana vitisho kuliko fursa, kwa sababu hii ilikuwa muhimu kwa ajili ya kuishi katika historia yetu ya mageuzi.</p><h3>Mazingira Yanayokuzunguka</h3><p>Uhasama pia unajengeka kwa sababu ya mazingira ya kifedha. Masuala ya kifedha huathiri kila mtu na mara nyingi yanachukuliwa kwa uzito na vyombo vya habari. Kwa mfano, soko la hisa likishuka kwa 1% linawekwa kwenye vichwa vya habari vikubwa, ilhali likipanda kwa 1% linaweza kutajwa kwa kifupi tu. Hii inafanya uhasama kuonekana kuwa jambo la kawaida na la msingi katika maisha ya kifedha. Mwandishi anasema waandishi wa habari na wachambuzi wanajua hili na mara nyingi huandika makala za kuogofya ili kuwavutia wasomaji na watazamaji.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema, "Matumaini yenye busara ni imani kwamba uwezekano wa matokeo mazuri upo kwa muda mrefu, hata kama kutakuwa na misukosuko njiani."</p></div><h3>Kupuuza Ubunifu na Urekebishaji</h3><p>Wahasama mara nyingi hupuuzia uwezo wa masoko na jamii kurekebisha hali na kuendelea. Mwandishi anatumia mfano wa mwanamazingira Lester Brown, ambaye mwaka 2008 alitabiri kuwa ulimwengu utakosa mafuta ifikapo 2030, akipuuza uwezekano wa teknolojia mpya. Miaka michache baadaye, ubunifu wa 'fracking' uliwezesha Marekani kuzalisha mafuta mengi kuliko ilivyotarajiwa. Vivyo hivyo, ubunifu wa ndege na maendeleo ya tiba ya moyo yalichukua muda mrefu kutambuliwa na vyombo vya habari, kwa sababu maendeleo hutokea polepole, ilhali uhasama hufanyika haraka.</p>` },
+      { id:'ch18', number:18, title:"Unapoamini Kila Kitu (When You’ll Believe Anything)", tags:['narratives','stories','psychology'], time:'Dakika ~9 kusoma', quotes:[ 'Appealing fictions, and why stories are more powerful than statistics.', 'The more you want something to be true, the more likely you are to believe a story that overestimates the odds of it being true.' ], comments:[ 'Simulizi (stories) ndiyo injini ya uchumi, siyo data.', 'Tunajaza mapengo ya maarifa yetu na simulizi zinazoendana na matakwa yetu ya kihisia.' ], body:`<p class='dropcap'>Sura hii inahusu nguvu ya hadithi (stories) na jinsi zinavyoathiri maamuzi yetu ya kifedha, mara nyingi kuliko takwimu na data. Mwandishi anatumia mfano wa ajabu: alien anayechunguza uchumi wa Marekani kati ya 2007 na 2009. Anaona kwamba vitu halisi (majimbo, viwanda, watu) havijabadilika. Lakini anashangazwa na takwimu za kiuchumi zinazoonyesha mdororo mkubwa. Sababu pekee iliyosababisha mdororo huo haikuwa mabadiliko ya vitu halisi, bali ni mabadiliko ya simulizi ambazo watu walikuwa wanajisimulia. Mwaka 2007, waliamini hadithi ya utulivu wa soko la nyumba na hekima ya mabenki. Mwaka 2009, waliacha kuamini hadithi hiyo.</p><h3>Hadithi Za Kuvutia (Appealing Fictions)</h3><p>Mwandishi anasema tunapokuwa katika hali ya hatari na hofu, huwa tunatengeneza na kuamini **"hadithi za kuvutia" (appealing fictions)**. Anatumia mfano wa tiba za kizamani zisizo na msingi wa kisayansi. Hali ya "unataka kitu fulani kiwe kweli" hukufanya uamini chochote kinachokuahidi matokeo hayo. Katika fedha, hii huonekana wakati wawekezaji wanapotoa fedha zao kwa wasimamizi wa fedha wanaotoa hadithi nzuri lakini zisizo na msingi imara.</p><h3>Kujaza Mapengo</h3><p>Kama ilivyo kwa mtoto mdogo asiyeelewa kila kitu kuhusu mazingira yake, sisi sote tunajaza mapengo ya maarifa yetu na hadithi zinazotupa hisia ya udhibiti na uelewa. Hii inatufanya tujione tuna akili zaidi kuliko ilivyo, na hivyo kufanya maamuzi yasiyofaa, hasa katika kutabiri siku zijazo. Hii ndiyo sababu kuna mahitaji makubwa ya utabiri wa soko, ingawa takwimu zinaonyesha hauna ufanisi. Mwishowe, mwandishi anatuonya kuwa sisi sote ni kama alien, tunaona kidogo tu, lakini tunajisimulia hadithi kamili ili kujisikia vizuri.</p>` },
+      { id:'ch19', number:19, title:"Sasa Pamoja (All Together Now)", tags:['summary','actionable lessons','personal advice'], time:'Dakika ~10 kusoma', quotes:[ 'There is no single right answer; just the answer that works for you.', 'Manage your money in a way that helps you sleep at night.' ], body:`<p class='dropcap'>Sura hii inajumuisha mafunzo makuu kutoka sura zilizopita na kuyapa maana ya vitendo. Mwandishi anaanza kwa hadithi ya daktari aliyemtoa meno 16 na tonsils mgonjwa wake bila ridhaa yake, akiamini kuwa kuna njia sahihi ya kumtibu. Anasema katika fedha, hakuna jibu moja sahihi, kwa sababu malengo na hali ya kila mtu ni tofauti.</p><h3>Mafunzo Muhimu</h3><p>Mwandishi anatoa muhtasari wa mafunzo haya kwa mtindo wa vidokezo fupi:</p><ul><li><strong>Nenda polepole na uwiano:</strong> Usihukumu haraka. Kila mtu ana historia na malengo yake ya kipekee.</li><li><strong>Punguza ego, ongeza utajiri:</strong> Weka akiba kwa kudhibiti ego yako, na kumbuka utajiri wa kweli hauwezi kuonekana.</li><li><strong>Simamia pesa zako kwa njia inayokusaidia kulala vizuri:</strong> Malengo ya kifedha yanapaswa kuendana na hali yako ya kihisia na kukupa amani, siyo faida kubwa zaidi.</li><li><strong>Tumia pesa kununua uhuru:</strong> Kuwa na uhuru wa kudhibiti muda wako ni faida kubwa zaidi ya kifedha. Ni bora kuliko gari la kifahari.</li><li><strong>Hifadhi pesa bila malengo maalum:</strong> Akiba ni kinga dhidi ya mambo yasiyotabirika.</li><li><strong>Kubali kulipa bei ya mafanikio:</strong> Jua kwamba soko lina ada yake (volatility, uncertainty) na ukubali kulipa badala ya kujaribu kukwepa.</li><li><strong>Tambua mchezo wako:</strong> Usiige wengine bila kujua malengo yao. Jua mchezo wako binafsi na ushikamane nao.</li></ul><p>Sura inahitimishwa kwa kusema, "Hakuna jibu moja sahihi; kuna jibu linalokufaa wewe tu". Mwandishi anasema jambo muhimu ni kupata mkakati unaofanya kazi kwako, na siyo ule unaoonekana 'sahihi' zaidi kwa wengine.</p>` },
+      { id:'ch20', number:20, title:"Maungamo (Confessions)", tags:['personal finance','strategy','savings'], time:'~8 min read', quotes:[ 'I did not intend to get rich. I just wanted to get independent.', 'The first rule of compounding is to never interrupt it unnecessarily.' ], body:`<p class='dropcap'>Katika sura hii ya mwisho, mwandishi anaweka wazi mtazamo wake binafsi na mkakati wa kifedha, akisisitiza kuwa hayo siyo ushauri kwa kila mtu, bali ni kile kinachofaa kwa maisha yake. Lengo lake kuu siyo kuwa tajiri, bali ni **uhuru (independence)**. Anataka kuwa na uwezo wa kuamka kila asubuhi na kufanya anachotaka, na kufanya kazi anayoipenda, kwa masharti yake, na na watu anaowapenda.</p><h3>Kanuni za Mwandishi</h3><p>Mwandishi na mke wake wanalenga kuishi chini ya uwezo wao na kuhifadhi pesa nyingi. Wanaishi katika nyumba waliyoinunua bila mkopo, jambo ambalo kihesabu siyo la faida zaidi, lakini linawapa utulivu mkubwa wa kiakili. Anahifadhi pesa kwa ajili ya "matukio ya ghafla", akiamini kuwa kila mtu atakabiliwa na gharama kubwa zisizotarajiwa maishani. Akiba hii humlinda dhidi ya kulazimika kuuza hisa kwa hasara wakati wa shida, na kumruhusu kuendelea na faida ya **compounding** kwa muda mrefu.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema anaamini kwamba kuna uhusiano mdogo sana kati ya juhudi unayoweka kwenye uwekezaji na matokeo unayopata. Anasema, "Dunia inaendeshwa na 'tails'—vitu vichache vinachangia sehemu kubwa ya faida". Hivyo, mkakati wake unategemea viwango vikubwa vya akiba, uvumilivu, na matumaini ya muda mrefu ya uchumi wa dunia.</p></div><p>Kwa kumalizia, mwandishi anasisitiza kuwa haijalishi uwe na malengo gani, au unataka kutumia pesa zako kwa ajili ya nini. Ni muhimu tu kujua kuwa unafanya maamuzi kwa ajili yako mwenyewe, na usitumie malengo ya wengine kama mwongozo wako.</p>` },
+      { id:'ch-ps', number:21, title:"Postscript: Historia Fupi ya Kwa Nini Watumiaji wa Marekani Wanafikiri Wanavyofikiri", tags:['history','consumerism','debt'], time:'Dakika ~15 kusoma', quotes:[ 'If you fell asleep in 1945 and woke up in 2020 you would not recognize the world around you.' ], body:`<p class='dropcap'>Sura hii ya mwisho (postscript) inaelezea jinsi utamaduni wa matumizi wa Marekani ulivyojengeka baada ya Vita Kuu ya Pili ya Dunia. Mwandishi anasema kama mtu angeamka mwaka 2020 baada ya kulala usingizi mwaka 1945, angeona mabadiliko makubwa na yasiyotarajiwa katika uchumi na tabia za watu.</p><h3>Mazingira Baada ya Vita</h3><p>Baada ya vita kumalizika, Wamarekani walikuwa na hofu kwamba mdororo wa uchumi wa 1930 ungejirejea. Lakini haikutokea. Sababu kuu ni kwamba kulikuwa na mambo matatu yaliyochangia:</p><ol><li><strong>Umuhimu wa Kifedha:</strong> Programu ya GI Bill ilitoa mikopo ya nyumba isiyo na riba kwa wanajeshi waliostaafu, na viwango vya riba viliwekwa chini na serikali. Hii ilifanya mikopo kuwa rahisi na kuchochea matumizi na ununuzi wa nyumba.</li><li><strong>Kukubalika kwa Madeni:</strong> Utamaduni wa kukubali madeni ulianza kujengeka, tofauti na enzi ya Depression. Madeni ya kaya yaliongezeka mara tano kati ya 1947 na 1957.</li><li><strong>Boom ya Uzalishaji:</strong> Miaka ya 1930 ilifanya Wamarekani kuwa wabunifu zaidi, na baada ya vita, viwanda vilihamia kwenye utengenezaji wa bidhaa za nyumbani, zilizokuwa zimehifadhiwa kwa muda mrefu.</li></ol><h3>Kukua kwa Madeni na Tofauti ya Kimapato</h3><p>Mwandishi anaeleza kuwa kuanzia miaka ya 1980, mapato yalikua kwa kasi, lakini faida hiyo haikuenea kwa kila mtu. Wataalamu, na wale walio na elimu ya juu, ndio waliofaidika zaidi, wakati mapato ya wengine yalibaki palepale. Hii ilisababisha hali ya watu wenye kipato cha chini kujaribu kuiga maisha ya matajiri kwa kuchukua madeni makubwa. Hali hii, pamoja na upatikanaji wa habari kupitia mitandao ya kijamii, imesababisha watu wengi kuhisi "mambo hayafanyi kazi" kwao, na kukuza hasira na kutokuwa na imani na mfumo.</p>` }
+    ];
+    
+    const chaptersEN = [
+      { id:'ch1', number:1, title:"No One’s Crazy", tags:['behavior','personal history','bias'], time:'~12 min read', quotes:[ 'Your personal experience is a tiny fraction of financial history, yet it’s often 80% of how you think about money.', 'Financial decisions make sense for the person making them.' ], comments:[ 'Generational imprinting shapes risk views.', 'Judge less—ask for context.' ], body:`<p class='dropcap'>This chapter shows that everyone makes financial decisions that feel right <em>to them</em>, shaped by history and environment. What looks silly to you may be perfectly rational given someone’s path.</p><h3>Personal History Dominates</h3><p>Growing up with high inflation rewires risk & reward differently than growing up in calm markets. Research by Malmendier & Nagel (NBER) finds early-life macro experiences imprint investing behavior.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'>Personal history bias can outweigh textbook knowledge.</div><h3>Lottery Logic</h3><p>For the poor, a ticket can be a <em>window of hope</em> when ladders are missing.</p><h3>Takeaway</h3><p><strong>Don’t be fooled:</strong> people aren’t crazy—just different. Understand where they’re coming from.</p>` },
+      { id:'ch2', number:2, title:"Luck & Risk", tags:['luck','risk','survivorship bias'], time:'~14 min read', quotes:[ 'Nothing is as good or as bad as it seems. —Scott Galloway', 'Success is a lousy teacher; it seduces smart people into thinking they can’t lose. —Bill Gates' ], comments:[ 'Gates + Lakeside exposure vs. Kent Evans accident.', 'Study patterns, not outliers.' ], body:`<p class='dropcap'>Outcomes blend <strong>luck</strong> and <strong>risk</strong>. Gates’ rare early exposure to computing contrasts with Kent Evans’ fatal accident—same talent, different tails.</p><h3>Beware Outcome Bias</h3><p>We over-credit winners and over-blame losers, ignoring luck and tail risk.</p><div class='ribbon bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl shadow-soft'><p class='m-0'><strong>Rule:</strong> Judge slowly; account for luck/risk in the distribution.</p></div><h3>GEICO & Graham</h3><p>Skill or luck? Usually both. Be careful copying outliers.</p>` },
+      { id:'ch3', number:3, title:"Never Enough", tags:['greed','social comparison','ethics'], time:'~12 min read', quotes:[ 'There is no reason to risk what you have and need for what you don’t have and don’t need.', '“Enough” isn’t weakness—it’s maturity.' ], comments:[ 'Gupta & Madoff: plenty already; greed broke reputation and freedom.', 'Goalpost moving: set limits early.' ], body:`<p class='dropcap'>Endless appetite destroys what matters: reputation, freedom, family, peace. Gupta and Madoff are warnings—don’t risk the vital for the trivial.</p><h3>The Ceilingless Comparison</h3><p>There’s always someone richer. The antidote is declaring: <strong>enough</strong>.</p><div class='callout p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20'><ul class='list-disc ps-5 m-0'><li>Fix your goalpost.</li><li>Don’t pawn reputation or freedom for speculative upside.</li></ul></div>` },
+      { id:'ch4', number:4, title:"Confounding Compounding", tags:['compounding','patience','exponential'], time:'~10 min read', quotes:[ 'Good investing is about consistently not screwing up.', 'The secret isn’t brilliant decisions; it’s long stretches of doing the right thing.' ], comments:[ 'Buffett’s wealth is mostly time at work.', 'Compounding whispers for years, then shouts.' ], body:`<p class='dropcap'><strong>Compounding</strong> is non-linear: quiet for years, then explosive. Patience produces results today’s eyes can’t imagine.</p><h3>Buffett’s Lesson</h3><p>Started at 10; the curve exploded after 65. Message: keep going and avoid big errors.</p><h3>Beyond Money</h3><p>Knowledge, health, relationships—all reward small, repeated efforts.</p>` },
+      { id:'ch5', number:5, title:'Getting Wealthy vs. Staying Wealthy', tags:['safety','risk','behavior'], time:'~12 min read', quotes:[ 'There are a million ways to get wealthy, but there’s only one way to stay wealthy: a combination of frugality and paranoia.', 'The ability to stick around for a long time, without wiping out or being forced to give up, is what makes the biggest difference.' ], comments:[ 'Kupata pesa ni tofauti na kuweka pesa.', 'Jesse Livermore alijua kupata, lakini hakujua kubaki na pesa.' ], body:`<p class='dropcap'>Kujipatia utajiri na kudumu ukiwa tajiri ni stadi mbili tofauti kabisa. Kupata utajiri kunahitaji <strong>kutafuta hatari</strong>, kuwa na matumaini na kujitosa. Kinyume chake, kudumu ukiwa tajiri kunahitaji <strong> kuepuka hatari</strong>, unyenyekevu, na hofu kuwa ulivyonavyo vinaweza kuondoka haraka kama ulivyovipata. Mwandishi anatukumbusha hadithi ya <strong>Jesse Livermore</strong>, mwekezaji maarufu ambaye alitengeneza utajiri mkubwa wakati wa mdororo wa soko la hisa la 1929 lakini hatimaye alifilisika na kujiua. Hali yake ilikuwa sawa na ya <strong>Abraham Germansky</strong>, ambaye alipoteza kila kitu katika mdororo huo huo.</p><h3>Mantiki ya Kuishi (Survival Mentality)</h3><p>Mafanikio ya kweli hayatokani na akili ya ziada au uwezo wa kipekee wa kufanya maamuzi sahihi, bali uwezo wa kuishi katika mazingira magumu. **Warren Buffett** ni mfano bora wa mantiki hii. Si lazima awekeze kwenye biashara zinazompa faida kubwa, bali anachagua biashara ambazo haziwezi kumwangamiza. Uwezo wake wa kudumu sokoni bila kufanya makosa makubwa ndio siri kuu ya mafanikio yake.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p><strong>Muhimu:</strong> Kuwa na fedha taslimu (cash) wakati wa soko la hisa linalopanda kunaweza kuonekana ni kupoteza fursa. Lakini fedha hiyo ndiyo itakayokuzuia usilazimike kuuza hisa zako kwa hasara wakati wa mdororo, hivyo kukuwezesha kubaki kwenye mchezo na kufaidika na ufufuo wa soko.</p></div><h3>Kupanga Kwa Ajili ya Kutofanikiwa</h3><p>Sehemu muhimu ya kila mpango wa kifedha ni kupanga kuwa mpango huo hauwezi kwenda kama ulivyotegemea. Mwandishi anataja mifano ya mambo yasiyotabirika kama Septemba 11, mdororo wa kifedha wa 2008, au janga la virusi vya Corona. Hii ndiyo maana ya **nafasi ya makosa (room for error)**. Hii siyo sawa na kuwa mhafidhina. Ni kuongeza uwezekano wa kufanikiwa kwa kuongeza nafasi yako ya kuishi na kudumu kwenye mchezo.</p><p>Kudumu kwenye mchezo ndio msingi wa uwekezaji mzuri. Haitarajiwi kwamba utafanya maamuzi sahihi kila wakati. Kinachotarajiwa ni uwezo wako wa **kutofanya makosa makubwa** yanayoweza kukumaliza kabisa.</p>` },
+      { id:'ch6', number:6, title:"Mkia, Unashinda (Tails, You Win)", tags:['tails','probability','diversification'], time:'~12 min read', quotes:[ 'You can be wrong half the time and still make a fortune.', 'A good definition of an investing genius is the man or woman who can do the average thing when all those around them are going crazy.' ], comments:[ 'Tukio la mkia (tail event) ni tukio moja la kipekee linaloleta matokeo makuu.', 'Ubora wa uwekezaji siyo kuwa sahihi kila wakati, bali kupata faida kubwa wakati ulipo sahihi.' ], body:`<p class='dropcap'>Sura hii inachunguza dhana kwamba matokeo mengi ya ajabu katika fedha, biashara, na maisha kwa ujumla yanatokana na **matukio ya mkia (tail events)**. Haya ni matukio machache, ya kipekee, yanayochangia asilimia kubwa ya matokeo yote. Mwandishi anatumia mfano wa mtoza sanaa <strong>Heinz Berggruen</strong>, ambaye alikuwa akikusanya sanaa nyingi bila kujua zipi zitafanikiwa. Kilichomfanya awe na mafanikio makubwa siyo kwamba alijua kila kipande alichonunua kingekuwa na thamani, bali ni kwamba baadhi ya vipande (kama vya Picasso) vilipanda thamani sana na kuvifunika vipande vingine vyote.</p><h3>Ukweli wa Soko la Hisa</h3><p>Hali hii inatumika pia katika soko la hisa. Utafiti wa J.P. Morgan Asset Management unaonyesha kuwa **40%** ya kampuni zote kwenye Russell 3000 Index zilipoteza angalau 70% ya thamani yake na hazikufufuka. Faida nyingi za soko zilitokana na **7%** tu ya kampuni zilizofanya vizuri sana. Hii inamaanisha kuwa hata kama unafanya uwekezaji mbalimbali, matokeo yako yataletwa na mafanikio ya kampuni chache tu.</p><h3>Uvumilivu Huleta Faida</h3><p>Kwa mwekezaji binafsi, somo ni rahisi: kinachokufanya uwe na mafanikio siyo maamuzi yako ya kila siku, bali ni uwezo wako wa kuvumilia na kubaki kwenye mchezo wakati wa kipindi cha misukosuko. Mwandishi anatumia mfano wa uwekezaji wa **$1 kila mwezi** kuanzia mwaka 1900 hadi 2019. Uwekezaji unaoendelea bila kusimama—hata wakati wa mdororo—hulipa zaidi ya ule unaosimama kwa hofu. Uvumilivu wakati wa misukosuko hutengeneza faida kubwa zaidi ya miaka mingi ya kawaida.</p><div class='ribbon bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl shadow-soft'><p class='m-0'><strong>Ujuzi wa Mwekezaji:</strong> Mwekezaji bora ni yule anayefanya mambo ya kawaida (kuwekeza, kuvumilia) wakati kila mtu mwingine anaenda wazimu.</p></div><p>Kwa kumalizia, mwandishi anasisitiza kwamba ni kawaida kufanya makosa katika biashara na uwekezaji. Jeff Bezos anasema Amazon inafanyia kazi makosa makubwa zaidi ya yale yanayojulikana. Mwekezaji maarufu **Peter Lynch** alisema, "Ukiwa mzuri katika biashara hii, utakuwa sahihi mara sita kati ya kumi". Maisha si ya 'kuwa sahihi', bali ni 'kudumu' mpaka mafanikio machache ya mkia yajionyeshe. Hivyo, unaweza kuwa umekosea nusu ya nyakati na bado ukatengeneza utajiri mkubwa.</p>` },
+      { id:'ch7', number:7, title:"Uhuru (Freedom)", tags:['happiness','control','time'], time:'~10 min read', quotes:[ 'Controlling your time is the highest dividend money pays.', 'Using your money to buy time and options has a lifestyle benefit few luxury goods can compete with.' ], comments:[ 'Pesa ina thamani ya juu zaidi kwa kutoa udhibiti wa muda wako.', 'Fanya kazi unayoipenda, kwa masharti yako. Unafanya kazi kwa sababu unataka, siyo kwa sababu unahitaji.' ], body:`<p class='dropcap'>Sura hii inaweka wazi kwamba thamani ya juu zaidi ya pesa siyo katika vitu inavyoweza kununua, bali ni uwezo wake wa kukupa **udhibiti juu ya muda wako**. Kulingana na mwanasaikolojia Angus Campbell, udhibiti wa maisha ni utabiri wa kuaminika zaidi wa furaha kuliko kipato au ukubwa wa nyumba. Mwandishi anasimulia uzoefu wake mwenyewe kama mfanyabiashara wa uwekezaji, ambapo licha ya mshahara mkubwa, aliacha kazi kwa sababu hakuwa na udhibiti wa muda wake.</p><h3>Kununua Uhuru, Siyo Anasa</h3><p>Mwandishi anasisitiza kuwa matumizi bora ya pesa ni kununua uhuru na chaguzi (options). Fedha kidogo benki inaweza kukupa uwezo wa kuchukua siku kadhaa za mapumziko bila hofu. Akiba ya miezi sita inaweza kukuwezesha kungojea kazi nzuri badala ya kukubali kazi ya kwanza utakayoipata. Hatimaye, akiba kubwa zaidi inakuwezesha kustaafu mapema, kabla ya kulazimika kufanya hivyo. Hii ni faida isiyoonekana ya utajiri—thamani ya kuwa na uwezo wa kusema, "Ninaweza kufanya chochote ninachotaka leo".</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Utafiti wa Karl Pillemer wa kuwahoji wazee unathibitisha hili: Hakuna hata mmoja aliyesema furaha inatokana na kujipatia mali au kulinganisha na wengine. Walithamini zaidi uhusiano, kuwa sehemu ya kitu kikubwa, na muda wa familia.</p></div><h3>Uchumi wa Maamuzi</h3><p>Mwandishi anaeleza jinsi uchumi umebadilika kutoka kazi za kutumia misuli hadi kazi za kutumia akili, kama zile za John D. Rockefeller. Kazi za leo zinakufuata nyumbani kwa sababu "zana" yako (akili yako) haibaki ofisini. Hii inaongeza hisia ya kutokuwa na udhibiti, licha ya mapato ya juu. Njia ya kukabiliana na hili ni kutumia pesa kujenga mipaka, na hivyo kurudisha udhibiti.</p>` },
+      { id:'ch8', number:8, title:"Paradoksi ya Mtu Kwenye Gari (Man in the Car Paradox)", tags:['ego','admiration','humility'], time:'~6 min read', quotes:[ 'No one is impressed with your possessions as much as you are.', 'Humility, kindness, and empathy will bring you more respect than horsepower ever will.' ], comments:[ 'Unadhani wengine wanakuvutiwa wewe, kumbe wanatazama gari yako na kujifikiria wao wakiwa nayo.', 'Lengo la kweli ni kuheshimiwa na kupendwa, sio kuvutia wivu.' ], body:`<p class='dropcap'>Kila mtu anapenda kuvutiwa. Unaponunua gari la kifahari, unadhani unajenga hisia ya "huyu mtu ni muhimu, ana akili, na ana ladha nzuri" kwa wengine. Lakini mwandishi anasema ukweli mchungu: hakuna anayekuangalia wewe. Badala yake, wanafikiri, "Kama ningekuwa na gari hilo, watu ningenifikiria mimi kuwa 'cool' ". Hii ndiyo **paradoksi ya mtu kwenye gari**. Unatafuta sifa, lakini matendo yako yanaishia kuwawekea wengine viwango vya kuigwa, huku wewe ukipuuzwa.</p><h3>Acha Ego, Fanya Kilicho Sahihi</h3><p>Mwandishi anasisitiza kwamba watu wanatamani heshima na kupendwa. Hata hivyo, mara nyingi wanatumia pesa kununua vitu vinavyowapa tu hisia ya muda ya umuhimu. Njia bora zaidi ya kupata heshima ni kupitia tabia kama vile <strong>unyenyekevu, wema, na uelewa</strong>. Hivi ndivyo vitu vinavyoleta uhusiano wa kweli na heshima ya kudumu, tofauti na anasa za muda mfupi.</p>` },
+      { id:'ch9', number:9, title:"Utajiri Ni Kile Usichokiona (Wealth is What You Don't See)", tags:['wealth','spending','frugality'], time:'~7 min read', quotes:[ 'Spending money to show people how much money you have is the fastest way to have less money.', 'Wealth is income not spent.' ], comments:[ 'Utajiri huonekana katika vitu ambavyo <em>hujanunua</em>.', 'Ili kuwa tajiri, lazima ufanye kinyume na vile watu wanavyofikiri.' ], body:`<p class='dropcap'>Sura hii inachunguza dhana kwamba utajiri wa kweli hauwezi kuonekana. Ni hali ya kifedha iliyojengwa kimya kimya. Watu wanapopita na gari la kifahari, wewe huona gari na kudhani mmiliki ni tajiri, ilhali anaweza kuwa anaishi kwa madeni. Mwandishi anasema, **"Utajiri ni fedha ambayo haijatumika"**. Ni uwekezaji, akiba, na mali nyingine zisizoonekana, ambazo zimejengwa kwa ajili ya mustakabali.</p><h3>Kutaka Kuwa Milionea vs. Kutaka Kutumia Milioni</h3><p>Kosa kubwa la watu wengi ni kwamba wanaposema wanataka kuwa milionea, wanamaanisha "nataka kutumia milioni moja". Hili ni kinyume kabisa cha kuwa milionea. Kuwa tajiri kunahitaji <strong>ujizuiaji (self-control)</strong>, kuacha anasa za muda mfupi ili kujenga utajiri wa kudumu. Mwandishi anatumia mfano wa mazoezi na kupunguza uzito: unajisikia vizuri baada ya kufanya kazi, lakini lazima ujizuie kula ili kupunguza uzito kweli.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Utajiri ni vigumu kujifunza kwa kuiga, kwa sababu hauwezi kuonekana. Ronald Read, janitor ambaye alikuwa milionea wa dola 8, hakuna aliyemuiga wakati wa uhai wake kwa sababu utajiri wake ulikuwa umefichwa.</p></div><p>Kwa kumalizia, mwandishi anaeleza kuwa ulimwengu umejaa watu wanaojinyima lakini ni matajiri wa kweli, na wale wanaojiita matajiri lakini wanaishi kwa madeni.</p>` },
+      { id:'ch10', number:10, title:"Hifadhi Pesa (Save Money)", tags:['saving','control','humility'], time:'~10 min read', quotes:[ 'Building wealth has little to do with your income or investment returns, and lots to do with your savings rate.', 'The only factor you can control generates one of the only things that matters. How wonderful.' ], comments:[ 'Saving is a hedge against life’s inevitable ability to surprise the hell out of you at the worst possible moment.', 'Humility is a key driver of saving.' ], body:`<p class='dropcap'>Mwandishi anasema uwezo wa kujenga utajiri hautokani na kiasi gani unachopata au faida ya uwekezaji wako, bali ni kiasi gani unachohifadhi. Anatoa mfano wa shida ya mafuta ya miaka ya 1970. Badala ya kupata mafuta zaidi, ulimwengu ulikwepa shida hiyo kwa kujenga magari na viwanda vyenye ufanisi zaidi wa nishati. Ufanisi huu ulikuwa jambo ambalo watu walikuwa na uwezo wa kulidhibiti. Kadhalika, kiasi gani unaokoa ni jambo unaloweza kudhibiti, tofauti na mapato ya uwekezaji ambayo hayako kwenye udhibiti wako.</p><h3>Kudhibiti Matarajio</h3><p>Mwandishi anasema thamani ya utajiri inahusiana na kile unachohitaji. Mtu anayeweza kuridhika na kipato kidogo ana faida zaidi ya yule anayepata faida kubwa lakini matumizi yake yanakua sambamba na mapato.</p><p>Hivyo, ufunguo wa kuongeza akiba yako siyo lazima kuongeza kipato chako, bali ni kupunguza matumizi yako. Mara nyingi, matumizi ya kifahari ni matokeo ya **ego** inayotaka kuonyesha uwezo wake. Wale waliofanikiwa kifedha mara nyingi hawajali maoni ya wengine juu ya maisha yao.</p><h3>Kuokoa Kwa Ajili ya Yasiyotabirika</h3><p>Hifadhi pesa sio tu kwa ajili ya malengo maalum kama nyumba au kustaafu. Inapaswa kuwa **"kinga dhidi ya mambo yasiyotabirika"**. Uwezekano wa matukio ya ghafla, kama vile matibabu au kupoteza kazi, huongeza thamani ya akiba ya ghafla. Mwandishi anasema, 'Faida ya fedha taslimu isiyopangwa kwa jambo maalum ni uwezo wake wa kukupa **uhuru**'. Uhuru huo wa kubadilisha kazi, kustaafu mapema, au kungoja fursa bora, ni faida isiyopimika.</p>` },
+      { id:'ch11', number:11, title:"Kufanya Jambo Linalowezekana > Kufanya Jambo Lenye Mantiki (Reasonable > Rational)", tags:['behavioral finance','endurance','psychology'], time:'~10 min read', quotes:[ 'Do not aim to be coldly rational when making financial decisions. Aim to just be pretty reasonable.', 'Reasonable is more realistic and you have a better chance of sticking with it for the long run.' ], comments:[ 'Kufanya uamuzi unaowezekana ni bora kuliko ule wenye mantiki, kwa sababu uwezekano wa kuendelea nao ni mkubwa.', 'Hisia huathiri maamuzi ya kifedha.' ], body:`<p class='dropcap'>Sura hii inasisitiza kwamba maamuzi ya kifedha hayafanywi na karatasi za hesabu (spreadsheets), bali na watu wenye hisia na hisia hizo huathiri matendo yao. Mwandishi anasema unapaswa kutofanya uamuzi uliokwisha pangwa na akili tu (rational), bali uamuzi unaowezekana (reasonable) unaofaa maisha yako na hali ya kihisia. Anatoa mfano wa daktari Julius Wagner-Jauregg, ambaye alishinda Nobel kwa kutibu ugonjwa wa kaswende kwa kuleta homa bandia. Ingawa ilikuwa ya kimantiki (rational), matibabu haya hayakuwa ya kuwezekana kwa wagonjwa wengi kwa sababu homa ilikuwa chungu. Vivyo hivyo, mikakati mingi ya kifedha iliyo na 'mantiki' kwenye karatasi, haitekelezeki maishani kwa sababu inapuuzia hisia za binadamu.</p><h3>Kuvumilia Kwa Ujasiri</h3><p>Mwandishi anasema uwezo wa kushikamana na mkakati wa uwekezaji ni muhimu zaidi ya ubora wa mkakati wenyewe. Uwekezaji mzuri una hitaji la kuvumilia vipindi vigumu. Mkakati mzuri ni ule unaokupa uwezo wa **kuvumilia**, na siyo ule unaokuahidi faida kubwa sana lakini unakushinikiza kihisia hadi unashindwa kuendelea. Hii ndiyo maana ni muhimu kuwekeza kwenye vitu unavyovipenda au unavyoviamini, kwa sababu itakuwa rahisi kwako kuvumilia wakati mgumu.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Uwekezaji una mantiki ni ule unaopunguza 'majuto ya baadaye'. Mshindi wa Nobel Harry Markowitz aligawanya uwekezaji wake 50/50 kati ya hisa na bonds kwa sababu hakutaka majuto ya soko likipanda au kushuka. Hii haikuwa ya kimantiki, lakini ilikuwa ya kuwezekana kwake.</p></div>` },
+      { id:'ch12', number:12, title:"Mshangao! (Surprise!)", tags:['history','prediction','unprecedented'], time:'~10 min read', quotes:[ 'Things that have never happened before happen all the time.', 'History is the study of change, ironically used as a map of the future.' ], comments:[ 'Historia siyo ramani ya mustakabali; ni mwongozo.', 'Matukio ya mkia (tail events) husababisha mabadiliko makubwa kuliko tunavyofikiri.' ], body:`<p class='dropcap'>Mwandishi anatoa mfano wa misiba isiyotabirika kama Shambulio la Septemba 11, ambalo lilisababisha mlolongo wa matukio ya kiuchumi hadi leo, ikiwemo kuongezeka kwa madeni ya wanafunzi. Matukio ya kipekee kama hayo, yanayoitwa **"matukio ya mkia"**, ndiyo yanayoathiri sana uchumi na maisha ya watu.</p><h3>Mabadiliko ya Kimuundo (Structural Changes)</h3><p>Pia, historia haitoi mwongozo sahihi kwa sababu mabadiliko ya kimuundo huufanya ulimwengu wa leo kuwa tofauti na ule wa zamani. Mfano: 401(k) (mpango wa kustaafu) uliibuka miaka ya 1970. Hii inamaanisha historia ya 'kuwekeza kwa kustaafu' haipo kwa muda mrefu kama tunavyofikiri. Vilevile, idadi ya mdororo wa kiuchumi nchini Marekani imebadilika kwa kiasi kikubwa. Sheria za uhasibu na muundo wa sekta pia vimebadilika, na kufanya ushauri wa uwekezaji wa Benjamin Graham wa miaka 40 iliyopita kutokuwa na maana leo.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema kuna tofauti kubwa kati ya kuwa mwenye akili (akili ya kutabiri) na kuwa sahihi. Ni muhimu kutumia historia kwa ajili ya kanuni pana, kama vile ulafi na hofu, lakini si kwa ajili ya 'kunakili' matukio maalum.</p></div><p>Kwa kumalizia, mwandishi anasema somo sahihi la kujifunza kutoka kwa mshangao siyo kutabiri nini kitatokea ijayo, bali ni kukubali kwamba ulimwengu ni wa kushangaza na hakuna anayejua nini kitatokea.</p>` },
+      { id:'ch13', number:13, title:"Nafasi kwa Ajili ya Makosa (Room for Error)", tags:['margin of safety','risk','planning'], time:'~11 min read', quotes:[ 'The most important part of every plan is planning on your plan not going according to plan.', 'The single point of failure is a threat to everything.' ], body:`<p class='dropcap'>Nafasi ya makosa (au 'margin of safety') ni moja ya dhana muhimu zaidi katika fedha. Mwandishi anatumia mfano wa wachezaji wa blackjack wanaoweka hesabu za karata. Wanajua hawawezi kushinda kila mara, hivyo hawaweki dau kubwa hata kama wana uhakika wa kushinda. Hii inawapa uwezo wa kuvumilia kushindwa mara chache na kubaki kwenye mchezo. Ndivyo ilivyo katika maisha na fedha.</p><h3>Kuepuka Kuangamizwa</h3><p>Mwandishi anaeleza kuwa **hakuna hatari inayofaa kuchukuliwa, ikiwa inaweza kusababisha kuangamizwa kabisa**. Anatumia mfano wa kucheza Russian roulette. Ingawa una uwezekano mkubwa wa kushinda, hatari ya kupoteza ni kubwa sana kiasi kwamba haifai. Vilevile, maamuzi ya kifedha yanayokufanya uhusike na 'single points of failure' yanapaswa kuepukwa. Mfano, kutegemea mshahara pekee bila akiba yoyote kunaweza kuwa hatari kubwa.</p><div class='ribbon bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl shadow-soft'><p class='m-0'>Mwandishi anasisitiza kuwa nafasi ya makosa haina uhusiano na kuwa mhafidhina. Badala yake, ni njia ya kukupa uwezo wa kuishi kipindi cha matukio yasiyotabirika, ili uweze kunufaika na matukio chanya ya muda mrefu. Inahusu kuongeza uwezekano wa kuishi.</p></div><p><strong>Bill Gates</strong> alitumia mantiki hii wakati wa kuanzisha Microsoft. Lengo lake lilikuwa kwanza kuhakikisha kampuni haiwezi kufa, na kisha kufanikiwa. Hii ni tofauti na mikakati mingi ya leo, inayolenga faida kubwa bila kujali hatari ya kupoteza. Kuwa na akiba ya kutosha inakupa nafasi ya kuepuka maamuzi ya ghafla, na pia inakupa 'njia ya kutoka' wakati mipango inapoenda vibaya.</p>` },
+      { id:'ch14', number:14, title:"Utapitia Mabadiliko (You'll Change)", tags:['personal growth','planning','regret'], time:'~8 min read', quotes:[ 'Long-term planning is harder than it seems because people’s goals and desires change over time.', 'We are prisoners to our past, different, selves.' ], body:`<p class='dropcap'>Sura hii inazungumzia changamoto ya kupanga mipango ya muda mrefu ya kifedha. Mwandishi anasema watu ni wabashiri duni wa "watu wa baadaye". Tunapofanya maamuzi leo, kama vile kuchagua kazi au kiasi cha kuwekeza, tunafanya hivyo kwa kuamini tunajua tunachotaka katika siku zijazo. Lakini hisia zetu, mahusiano, na matamanio yetu hubadilika sana baada ya muda. Mwandishi anatoa mfano wa rafiki yake ambaye alifanya kazi kwa bidii kuwa daktari, lakini miaka mingi baadaye alichukia sana kazi yake kutokana na presha.</p><h3>Kudanganya Ubongo Wako</h3><p>Wanasikolojia wanaita hii **"Udanganyifu wa Mwisho wa Historia" (End of History Illusion)**, ambapo tunaamini tumebadilika sana zamani lakini hatutabadilika tena siku zijazo. Hali hii inafanya kupanga maisha kwa miaka 80 kuwa ngumu. Mwandishi anapendekeza kuwa na malengo yanayowezekana, yasiyotegemea tu kazi au fedha, kama vile kuwa na muda wa kutosha na familia na marafiki.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema, "Unapaswa kuacha mipango ya kifedha iliyofanywa na wewe wa zamani bila huruma, badala ya kuiweka kwenye 'mashine ya kusaidia maisha' na kuivuta". Hii inamaanisha kukubali mabadiliko na kufanya maamuzi mapya yanayolingana na wewe wa leo.</p></div>` },
+      { id:'ch15', number:15, title:"Hakuna Kitu Bure (Nothing's Free)", tags:['fees','cost of success','volatility'], time:'~10 min read', quotes:[ 'Everything has a price, but not all prices appear on labels.', 'The inability to pay the price of success is the main reason for failure.' ], body:`<p class='dropcap'>Sura hii inaeleza kwamba kila kitu katika fedha, kama ilivyo maishani, kina gharama yake. Lakini tatizo ni kwamba mara nyingi bei ya vitu muhimu, hasa katika uwekezaji, haionekani kwenye lebo. Mwandishi anasema bei ya mafanikio katika soko la hisa siyo dola, bali ni **mabadiliko (volatility), hofu, mashaka, na majuto**. Hivi ndivyo ada unayolipa ili kupata faida ya muda mrefu. Mwandishi anasema unapaswa kulipa ada hiyo na kuikubali kama sehemu ya mchezo. Anasisitiza kuwa jaribio la kukwepa ada hii ndio chanzo cha kushindwa.</p><h3>Ada, Siyo Faini</h3><p>Mwandishi anatumia mfano wa watalii Disneyland. Watu wengi wanakubali kulipa $100 kwa tiketi, kwa sababu wanaona thamani ya furaha wanayoipata. Wanaikubali kama ada. Vivyo hivyo, mabadiliko ya soko na misukosuko inapaswa kuonekana kama **ada ya kuingia** ili kufurahia faida ya muda mrefu, na siyo kama faini. Mwandishi anasema ni ujinga kujaribu kuiba gari la kifahari kwa kuendesha bila kulipa. Watu wanaojaribu kufanya hivyo, kama vile kutabiri soko au kufanya biashara fupi fupi, mara nyingi huishia kupoteza.</p><div class='ribbon bg-white/60 dark:bg-slate-900/60 p-4 rounded-xl shadow-soft'><p class='m-0'>Makosa ya Jeffrey Immelt (CEO wa GE) na Jack Welch yalikuwa kujaribu kutoa faida kubwa bila kulipa ada ya ukosefu wa uhakika. Walijaribu 'kulainisha' mapato, lakini mwishowe bili ilikuja ikiwa kubwa zaidi.</p></div>` },
+      { id:'ch16', number:16, title:"Wewe na Mimi (You & Me)", tags:['time horizon','social comparison','investing game'], time:'~10 min read', quotes:[ 'Beware taking financial cues from people playing a different game than you are.', 'An iron rule of finance is that money chases returns to the greatest extent that it can.' ], body:`<p class='dropcap'>Mwandishi anaeleza kuwa makosa makubwa ya kifedha, kama vile kununua hisa za 'bubble' (bubble stock), hutokea kwa sababu wawekezaji huangalia wengine wanaocheza mchezo tofauti na wao, na kuiga bila kufikiri. Mtu anayewekeza kwa ajili ya kustaafu miaka 30 ijayo ana malengo tofauti kabisa na mfanyabiashara wa kila siku (day trader). Soko linaweza kuonekana kuwa na bei isiyo ya kawaida, lakini bei hiyo inaweza kuwa ya kimantiki kwa yule anayecheza mchezo tofauti. **Matukio ya 'bubble'** hutokea wakati wawekezaji wa muda mfupi wanapojiunga na soko, wakifuatilia faida fupi fupi na kupuuza thamani ya muda mrefu. Hali hii inawavutia wawekezaji wa muda mrefu, ambao huishia kuumia.</p><h3>Kujua Mchezo Wako</h3><p>Mwandishi anasisitiza umuhimu wa **kujua na kushikamana na mchezo wako wa kifedha**. Hii inamaanisha kuandika malengo yako wazi, muda wako wa uwekezaji, na uvumilivu wako. Kuwa na maono haya kunakusaidia kupuuza kelele za soko na maoni ya wengine ambao wanaweza kuwa na malengo tofauti. Soko la hisa lina wawekezaji wenye malengo tofauti, na kuwafananisha wote ni kosa kubwa.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema: **"An anchor of psychology is not realizing that rational people can see the world differently"**. Watu wenye akili wanaweza kufanya maamuzi yanayoonekana ya kushangaza kwa sababu wanashughulikia mambo kutoka kwa mchezo tofauti kabisa, na kuangalia vitu tofauti.</p></div>` },
+      { id:'ch17', number:17, title:"Ushawishi wa Uhasama (The Seduction of Pessimism)", tags:['optimism','pessimism','media bias'], time:'~11 min read', quotes:[ 'Optimism sounds like a sales pitch. Pessimism sounds like someone trying to help you.', 'Organisms that treat threats as more urgent than opportunities have a better chance to survive and reproduce.' ], body:`<p class='dropcap'>Sura hii inachunguza kwa nini uhasama (pessimism) ni wa kuvutia sana katika masuala ya kifedha na kwa nini watu wanafurahia kusikia kwamba mambo yanaenda vibaya. Mwandishi anasema uhasama unaonekana kuwa wa busara na wenye akili, ilhali matumaini (optimism) mara nyingi yanaonekana kama maneno ya kuuza. Sehemu ya hii inatokana na silika za binadamu: tunatilia maanani sana vitisho kuliko fursa, kwa sababu hii ilikuwa muhimu kwa ajili ya kuishi katika historia yetu ya mageuzi.</p><h3>Mazingira Yanayokuzunguka</h3><p>Uhasama pia unajengeka kwa sababu ya mazingira ya kifedha. Masuala ya kifedha huathiri kila mtu na mara nyingi yanachukuliwa kwa uzito na vyombo vya habari. Kwa mfano, soko la hisa likishuka kwa 1% linawekwa kwenye vichwa vya habari vikubwa, ilhali likipanda kwa 1% linaweza kutajwa kwa kifupi tu. Hii inafanya uhasama kuonekana kuwa jambo la kawaida na la msingi katika maisha ya kifedha. Mwandishi anasema waandishi wa habari na wachambuzi wanajua hili na mara nyingi huandika makala za kuogofya ili kuwavutia wasomaji na watazamaji.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema, "Matumaini yenye busara ni imani kwamba uwezekano wa matokeo mazuri upo kwa muda mrefu, hata kama kutakuwa na misukosuko njiani."</p></div><h3>Kupuuza Ubunifu na Urekebishaji</h3><p>Wahasama mara nyingi hupuuzia uwezo wa masoko na jamii kurekebisha hali na kuendelea. Mwandishi anatumia mfano wa mwanamazingira Lester Brown, ambaye mwaka 2008 alitabiri kuwa ulimwengu utakosa mafuta ifikapo 2030, akipuuza uwezekano wa teknolojia mpya. Miaka michache baadaye, ubunifu wa 'fracking' uliwezesha Marekani kuzalisha mafuta mengi kuliko ilivyotarajiwa. Vivyo hivyo, ubunifu wa ndege na maendeleo ya tiba ya moyo yalichukua muda mrefu kutambuliwa na vyombo vya habari, kwa sababu maendeleo hutokea polepole, ilhali uhasama hufanyika haraka.</p>` },
+      { id:'ch18', number:18, title:"Unapoamini Kila Kitu (When You’ll Believe Anything)", tags:['narratives','stories','psychology'], time:'~9 min read', quotes:[ 'Appealing fictions, and why stories are more powerful than statistics.', 'The more you want something to be true, the more likely you are to believe a story that overestimates the odds of it being true.' ], body:`<p class='dropcap'>Sura hii inahusu nguvu ya hadithi (stories) na jinsi zinavyoathiri maamuzi yetu ya kifedha, mara nyingi kuliko takwimu na data. Mwandishi anatumia mfano wa ajabu: alien anayechunguza uchumi wa Marekani kati ya 2007 na 2009. Anaona kwamba vitu halisi (majimbo, viwanda, watu) havijabadilika. Lakini anashangazwa na takwimu za kiuchumi zinazoonyesha mdororo mkubwa. Sababu pekee iliyosababisha mdororo huo haikuwa mabadiliko ya vitu halisi, bali ni mabadiliko ya simulizi ambazo watu walikuwa wanajisimulia. Mwaka 2007, waliamini hadithi ya utulivu wa soko la nyumba na hekima ya mabenki. Mwaka 2009, waliacha kuamini hadithi hiyo.</p><h3>Hadithi Za Kuvutia (Appealing Fictions)</h3><p>Mwandishi anasema tunapokuwa katika hali ya hatari na hofu, huwa tunatengeneza na kuamini **"hadithi za kuvutia" (appealing fictions)**. Anatumia mfano wa tiba za kizamani zisizo na msingi wa kisayansi. Hali ya "unataka kitu fulani kiwe kweli" hukufanya uamini chochote kinachokuahidi matokeo hayo. Katika fedha, hii huonekana wakati wawekezaji wanapotoa fedha zao kwa wasimamizi wa fedha wanaotoa hadithi nzuri lakini zisizo na msingi imara.</p><h3>Kujaza Mapengo</h3><p>Kama ilivyo kwa mtoto mdogo asiyeelewa kila kitu kuhusu mazingira yake, sisi sote tunajaza mapengo ya maarifa yetu na hadithi zinazotupa hisia ya udhibiti na uelewa. Hii inatufanya tujione tuna akili zaidi kuliko ilivyo, na hivyo kufanya maamuzi yasiyofaa, hasa katika kutabiri siku zijazo. Hii ndiyo sababu kuna mahitaji makubwa ya utabiri wa soko, ingawa takwimu zinaonyesha hauna ufanisi. Mwishowe, mwandishi anatuonya kuwa sisi sote ni kama alien, tunaona kidogo tu, lakini tunajisimulia hadithi kamili ili kujisikia vizuri.</p>` },
+      { id:'ch19', number:19, title:"Sasa Pamoja (All Together Now)", tags:['summary','actionable lessons','personal advice'], time:'~10 min read', quotes:[ 'There is no single right answer; just the answer that works for you.', 'Manage your money in a way that helps you sleep at night.' ], body:`<p class='dropcap'>Sura hii inajumuisha mafunzo makuu kutoka sura zilizopita na kuyapa maana ya vitendo. Mwandishi anaanza kwa hadithi ya daktari aliyemtoa meno 16 na tonsils mgonjwa wake bila ridhaa yake, akiamini kuwa kuna njia sahihi ya kumtibu. Anasema katika fedha, hakuna jibu moja sahihi, kwa sababu malengo na hali ya kila mtu ni tofauti.</p><h3>Mafunzo Muhimu</h3><p>Mwandishi anatoa muhtasari wa mafunzo haya kwa mtindo wa vidokezo fupi:</p><ul><li><strong>Nenda polepole na uwiano:</strong> Usihukumu haraka. Kila mtu ana historia na malengo yake ya kipekee.</li><li><strong>Punguza ego, ongeza utajiri:</strong> Weka akiba kwa kudhibiti ego yako, na kumbuka utajiri wa kweli hauwezi kuonekana.</li><li><strong>Simamia pesa zako kwa njia inayokusaidia kulala vizuri:</strong> Malengo ya kifedha yanapaswa kuendana na hali yako ya kihisia na kukupa amani, siyo faida kubwa zaidi.</li><li><strong>Tumia pesa kununua uhuru:</strong> Kuwa na uhuru wa kudhibiti muda wako ni faida kubwa zaidi ya kifedha. Ni bora kuliko gari la kifahari.</li><li><strong>Hifadhi pesa bila malengo maalum:</strong> Akiba ni kinga dhidi ya mambo yasiyotabirika.</li><li><strong>Kubali kulipa bei ya mafanikio:</strong> Jua kwamba soko lina ada yake (volatility, uncertainty) na ukubali kulipa badala ya kujaribu kukwepa.</li><li><strong>Tambua mchezo wako:</strong> Usiige wengine bila kujua malengo yao. Jua mchezo wako binafsi na ushikamane nao.</li></ul><p>Sura inahitimishwa kwa kusema, "Hakuna jibu moja sahihi; kuna jibu linalokufaa wewe tu". Mwandishi anasema jambo muhimu ni kupata mkakati unaofanya kazi kwako, na siyo ule unaoonekana 'sahihi' zaidi kwa wengine.</p>` },
+      { id:'ch20', number:20, title:"Maungamo (Confessions)", tags:['personal finance','strategy','savings'], time:'~8 min read', quotes:[ 'I did not intend to get rich. I just wanted to get independent.', 'The first rule of compounding is to never interrupt it unnecessarily.' ], body:`<p class='dropcap'>Katika sura hii ya mwisho, mwandishi anaweka wazi mtazamo wake binafsi na mkakati wa kifedha, akisisitiza kuwa hayo siyo ushauri kwa kila mtu, bali ni kile kinachofaa kwa maisha yake. Lengo lake kuu siyo kuwa tajiri, bali ni **uhuru (independence)**. Anataka kuwa na uwezo wa kuamka kila asubuhi na kufanya anachotaka, na kufanya kazi anayoipenda, kwa masharti yake, na na watu anaowapenda.</p><h3>Kanuni za Mwandishi</h3><p>Mwandishi na mke wake wanalenga kuishi chini ya uwezo wao na kuhifadhi pesa nyingi. Wanaishi katika nyumba waliyoinunua bila mkopo, jambo ambalo kihesabu siyo la faida zaidi, lakini linawapa utulivu mkubwa wa kiakili. Anahifadhi pesa kwa ajili ya "matukio ya ghafla", akiamini kuwa kila mtu atakabiliwa na gharama kubwa zisizotarajiwa maishani. Akiba hii humlinda dhidi ya kulazimika kuuza hisa kwa hasara wakati wa shida, na kumruhusu kuendelea na faida ya **compounding** kwa muda mrefu.</p><div class='callout p-4 rounded-xl bg-slate-50 dark:bg-slate-800'><p>Mwandishi anasema anaamini kwamba kuna uhusiano mdogo sana kati ya juhudi unayoweka kwenye uwekezaji na matokeo unayopata. Anasema, "Dunia inaendeshwa na 'tails'—vitu vichache vinachangia sehemu kubwa ya faida". Hivyo, mkakati wake unategemea viwango vikubwa vya akiba, uvumilivu, na matumaini ya muda mrefu ya uchumi wa dunia.</p></div><p>Kwa kumalizia, mwandishi anasisitiza kuwa haijalishi uwe na malengo gani, au unataka kutumia pesa zako kwa ajili ya nini. Ni muhimu tu kujua kuwa unafanya maamuzi kwa ajili yako mwenyewe, na usitumie malengo ya wengine kama mwongozo wako.</p>` },
+      { id:'ch-ps', number:21, title:"Postscript: Historia Fupi ya Kwa Nini Watumiaji wa Marekani Wanafikiri Wanavyofikiri", tags:['history','consumerism','debt'], time:'~15 min read', quotes:[ 'If you fell asleep in 1945 and woke up in 2020 you would not recognize the world around you.' ], body:`<p class='dropcap'>Sura hii ya mwisho (postscript) inaelezea jinsi utamaduni wa matumizi wa Marekani ulivyojengeka baada ya Vita Kuu ya Pili ya Dunia. Mwandishi anasema kama mtu angeamka mwaka 2020 baada ya kulala usingizi mwaka 1945, angeona mabadiliko makubwa na yasiyotarajiwa katika uchumi na tabia za watu.</p><h3>Mazingira Baada ya Vita</h3><p>Baada ya vita kumalizika, Wamarekani walikuwa na hofu kwamba mdororo wa uchumi wa 1930 ungejirejea. Lakini haikutokea. Sababu kuu ni kwamba kulikuwa na mambo matatu yaliyochangia:</p><ol><li><strong>Umuhimu wa Kifedha:</strong> Programu ya GI Bill ilitoa mikopo ya nyumba isiyo na riba kwa wanajeshi waliostaafu, na viwango vya riba viliwekwa chini na serikali. Hii ilifanya mikopo kuwa rahisi na kuchochea matumizi na ununuzi wa nyumba.</li><li><strong>Kukubalika kwa Madeni:</strong> Utamaduni wa kukubali madeni ulianza kujengeka, tofauti na enzi ya Depression. Madeni ya kaya yaliongezeka mara tano kati ya 1947 na 1957.</li><li><strong>Boom ya Uzalishaji:</strong> Miaka ya 1930 ilifanya Wamarekani kuwa wabunifu zaidi, na baada ya vita, viwanda vilihamia kwenye utengenezaji wa bidhaa za nyumbani, zilizokuwa zimehifadhiwa kwa muda mrefu.</li></ol><h3>Kukua kwa Madeni na Tofauti ya Kimapato</h3><p>Mwandishi anaeleza kuwa kuanzia miaka ya 1980, mapato yalikua kwa kasi, lakini faida hiyo haikuenea kwa kila mtu. Wataalamu, na wale walio na elimu ya juu, ndio waliofaidika zaidi, wakati mapato ya wengine yalibaki palepale. Hii ilisababisha hali ya watu wenye kipato cha chini kujaribu kuiga maisha ya matajiri kwa kuchukua madeni makubwa. Hali hii, pamoja na upatikanaji wa habari kupitia mitandao ya kijamii, imesababisha watu wengi kuhisi "mambo hayafanyi kazi" kwao, na kukuza hasira na kutokuwa na imani na mfumo.</p>` }
+    ];
+    
+    //---------- Helpers ----------
+    const $ = (sel, ctx=document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+    const store = {
+      get(k, d){ try{ return JSON.parse(localStorage.getItem(k)) ?? d }catch{ return d } },
+      set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+    };
+
+    //---------- ElevenLabs API Configuration ----------
+    const ELEVENLABS_API_KEY = 'sk_58a22deb6df235deea7b1716f8a7a36b39f2c1dba0cd1f58'; // Replace with your actual API key from ElevenLabs
+    const ELEVENLABS_API_URL = 'https://api.elevenlabs.io/v1/text-to-speech';
+    
+    const state = {
+      chapterIndex: store.get('pm_chapterIndex', 0),
+      theme: store.get('pm_theme', 'light'), // light | sepia | night
+      font: store.get('pm_font', 'serif'),
+      textScale: store.get('pm_textScale', 1),
+      lang: store.get('pm_lang', 'sw'),
+      collapsed: false
+    };
+    
+    // let speechSynthesis = null; // Not used in ElevenLabs implementation
+    let isSpeaking = false;
+    let audioElement = null; // Audio element for playing ElevenLabs audio
+
+    function applyTheme(){
+      document.documentElement.classList.remove('theme-sepia','theme-night','dark');
+      if(state.theme==='sepia') document.documentElement.classList.add('theme-sepia');
+      if(state.theme==='night') { document.documentElement.classList.add('theme-night','dark'); }
+      $('#themeBtn i').className = state.theme==='night' ? 'bi bi-moon-stars' : (state.theme==='sepia' ? 'bi bi-droplet-half' : 'bi bi-brightness-high');
+    }
+
+    function applyFont(){
+      document.body.classList.remove('font-sans','font-serif','font-mono','font-lora','font-sourceSerif','font-nunito','font-poppins','font-rslab','font-literata');
+      const map = { serif:'font-serif', sans:'font-sans', mono:'font-mono', lora:'font-lora', sourceSerif:'font-sourceSerif', nunito:'font-nunito', poppins:'font-poppins', rslab:'font-rslab', literata:'font-literata' };
+      document.body.classList.add(map[state.font] || 'font-serif');
+    }
+
+    function applyTextScale(){ $('#chapterBody').style.fontSize = (state.textScale*100).toFixed(0) + '%'; $('#textSizeLabel').textContent = (state.textScale*100).toFixed(0) + '%'; }
+
+    function setI18N(){
+      const dict = I18N[state.lang];
+      $$('[data-i18n="theme"]').forEach(el=> el.textContent = dict.theme);
+      $$('[data-i18n="appearance"]').forEach(el=> el.textContent = dict.appearance);
+      $$('[data-i18n="notes"]').forEach(el=> el.textContent = dict.notes);
+      $$('[data-i18n="toc"]').forEach(el=> el.textContent = dict.toc);
+      const collBtn = $('#collapseAll');
+      collBtn.textContent = state.collapsed ? dict.expand : dict.collapse;
+      $$('[data-i18n="chapter"]').forEach(el=> el.textContent = dict.chapter);
+      $$('[data-i18n="quotes"]').forEach(el=> el.textContent = dict.quotes);
+      $$('[data-i18n="comments"]').forEach(el=> el.textContent = dict.comments);
+      $$('[data-i18n="modalTitle"]').forEach(el=> el.textContent = dict.modalTitle);
+      $$('[data-i18n="close"]').forEach(el=> el.textContent = dict.close);
+      $$('[data-i18n="prev"]').forEach(el=> el.textContent = dict.prev);
+      $$('[data-i18n="next"]').forEach(el=> el.textContent = dict.next);
+      $('#playAudio').textContent = dict.play;
+      $('#stopAudio').textContent = dict.stop;
+    }
+
+    function renderTOC(){
+      const list = $('#chaptersList');
+      list.innerHTML='';
+      if(state.collapsed){ return; }
+      const chapterData = state.lang === 'en' ? chaptersEN : chaptersSW;
+      chapterData.forEach((ch, idx)=>{
+        const active = idx===state.chapterIndex;
+        const li = document.createElement('div');
+        li.className = `p-3 hover:bg-slate-50 dark:hover:bg-slate-800 ${active?'bg-brand-50/60 dark:bg-slate-800':''}`;
+        li.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="mt-1"><i class="bi ${active?'bi-bookmark-fill text-brand-600':'bi-bookmark'}"></i></div>
+            <div class="min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <button class="toc-item text-start w-full" data-idx="${idx}">
+                  <div class="text-xs uppercase tracking-wider text-slate-500">${I18N[state.lang].chapter} ${ch.number}</div>
+                  <div class="font-medium text-slate-800 dark:text-slate-100">${ch.title}</div>
+                </button>
+                <span class="text-xs text-slate-500 whitespace-nowrap">${ch.time||''}</span>
+              </div>
+              ${ch.tags?.length? `<div class="mt-1 flex flex-wrap gap-1">${ch.tags.map(t=>`<span class='px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'>#${t}</span>`).join('')}</div>`:''}
+            </div>
+          </div>`;
+        list.appendChild(li);
+      });
+      $$('.toc-item').forEach(btn=>btn.addEventListener('click', ()=>{ loadChapter(+btn.dataset.idx); scrollToTop(); if(window.innerWidth<768) $('#toc').classList.add('hidden'); }));
+    }
+
+    function renderChapter(){
+      const ch = state.lang === 'en' ? chaptersEN[state.chapterIndex] : chaptersSW[state.chapterIndex];
+      $('#chapterTitle').textContent = `${I18N[state.lang].chapter} ${ch.number}: ${ch.title}`;
+      $('#chapterMeta').innerHTML = `<span class='me-2'><i class='bi bi-clock'></i> ${ch.time || ''}</span>` + (ch.tags?.length? `<span class='me-2'><i class='bi bi-tags'></i> ${ch.tags.join(', ')}</span>`:'');
+      const body = $('#chapterBody');
+      body.classList.add('fade-enter');
+      body.innerHTML = ch.body;
+      setTimeout(()=>{ body.classList.remove('fade-enter'); body.classList.add('fade-enter-active'); setTimeout(()=>body.classList.remove('fade-enter-active'), 350); }, 10);
+
+      if(ch.quotes && ch.quotes.length){
+        $('#quotesWrap').classList.remove('hidden');
+        $('#quotesList').innerHTML = ch.quotes.map(q=>`<blockquote class='p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 italic'><i class='bi bi-quote text-brand-500 me-2'></i> ${q}</blockquote>`).join('');
+      } else { $('#quotesWrap').classList.add('hidden'); }
+
+      if(ch.comments && ch.comments.length){
+        $('#commentsWrap').classList.remove('hidden');
+        $('#commentsList').innerHTML = ch.comments.map(c=>`<div class='p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl ribbon'>${c}</div>`).join('');
+      } else { $('#commentsWrap').classList.add('hidden'); }
+
+      const chapterData = state.lang === 'en' ? chaptersEN : chaptersSW;
+      $('#progressLabel').textContent = I18N[state.lang].progress(ch.number, chapterData.length);
+      document.title = `${I18N[state.lang].chapter} ${ch.number}: ${ch.title} — Psychology of Money`;
+      location.hash = `#${ch.id}`;
+
+      store.set('pm_chapterIndex', state.chapterIndex);
+      
+      stopSpeaking();
+    }
+
+    function loadChapter(idx){ 
+      const chapterData = state.lang === 'en' ? chaptersEN : chaptersSW;
+      state.chapterIndex = Math.max(0, Math.min(chapterData.length-1, idx)); 
+      renderTOC(); 
+      renderChapter(); 
+    }
+    function scrollToTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    //---------- Text-to-Speech Functionality ----------
+    function openVoiceSelectionModal() {
+      // Show the voice selection modal
+      const modal = new bootstrap.Modal($('#voiceSelectionModal'));
+      modal.show();
+    }
+    
+    function startSpeaking() {
+      // Open voice selection modal instead of directly speaking
+      openVoiceSelectionModal();
+    }
+    
+    async function speakWithVoice(voiceId) {
+      const textToSpeak = $('#chapterBody').innerText;
+      if (!textToSpeak) return;
+
+      stopSpeaking();
+      
+      try {
+        // Show loading state
+        $('#playAudio').innerHTML = '<i class="bi bi-play-circle me-1"></i>Inachakulisha...';
+        $('#playAudio').disabled = true;
+        
+        // Call ElevenLabs API to convert text to speech
+        const response = await fetch(`${ELEVENLABS_API_URL}/${voiceId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'xi-api-key': ELEVENLABS_API_KEY
+          },
+          body: JSON.stringify({
+            text: textToSpeak,
+            model_id: 'eleven_multilingual_v2',
+            voice_settings: {
+              stability: 0.5,
+              similarity_boost: 0.5
+            }
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`ElevenLabs API error: ${response.status} ${response.statusText}`);
+        }
+        
+        // Get the audio data as blob
+        const audioData = await response.blob();
+        
+        // Create object URL for the audio
+        const audioUrl = URL.createObjectURL(audioData);
+        
+        // Create audio element if it doesn't exist
+        if (!audioElement) {
+          audioElement = new Audio();
+        }
+        
+        // Set the audio source
+        audioElement.src = audioUrl;
+        
+        // Set up event listeners
+        audioElement.onplay = () => {
+          isSpeaking = true;
+          $('#playAudio').style.display = 'none';
+          $('#stopAudio').style.display = 'inline-block';
+        };
+        
+        audioElement.onended = () => {
+          isSpeaking = false;
+          $('#playAudio').style.display = 'inline-block';
+          $('#stopAudio').style.display = 'none';
+          $('#playAudio').innerHTML = '<i class="bi bi-play-circle me-1"></i>Soma kwa Sauti';
+          $('#playAudio').disabled = false;
+        };
+        
+        audioElement.onerror = () => {
+          isSpeaking = false;
+          $('#playAudio').style.display = 'inline-block';
+          $('#stopAudio').style.display = 'none';
+          $('#playAudio').innerHTML = '<i class="bi bi-play-circle me-1"></i>Soma kwa Sauti';
+          $('#playAudio').disabled = false;
+        };
+        
+        // Play the audio
+        await audioElement.play();
+      } catch (error) {
+        console.error('Error converting text to speech:', error);
+        // Reset button state
+        $('#playAudio').innerHTML = '<i class="bi bi-play-circle me-1"></i>Soma kwa Sauti';
+        $('#playAudio').disabled = false;
+        alert('Hitilafu imetokea wakati wa kusoma maandishi. Tafadhali jaribu tena.');
+      }
+    }
+    
+    function stopSpeaking() {
+      if (isSpeaking && audioElement) {
+          audioElement.pause();
+          audioElement.currentTime = 0;
+          isSpeaking = false;
+          $('#playAudio').style.display = 'inline-block';
+          $('#stopAudio').style.display = 'none';
+          $('#playAudio').innerHTML = '<i class="bi bi-play-circle me-1"></i>Soma kwa Sauti';
+          $('#playAudio').disabled = false;
+      }
+    }
+
+    //---------- Search ----------
+    function clearHighlights(){ $$('#chapterBody mark.search-hit').forEach(m=>{ const t = document.createTextNode(m.textContent); m.replaceWith(t); }); }
+
+    function highlightInChapter(q){
+      if(!q) return false;
+      clearHighlights();
+      const walker = document.createTreeWalker($('#chapterBody'), NodeFilter.SHOW_TEXT, null);
+      let found=false; const hits=[];
+      while(walker.nextNode()){
+        const node = walker.currentNode; const text = node.nodeValue; const idx = text.toLowerCase().indexOf(q.toLowerCase());
+        if(idx>-1){
+          found=true;
+          const span = document.createElement('span');
+          span.innerHTML = text.substring(0,idx) + `<mark class='search-hit'>` + text.substring(idx, idx+q.length) + `</mark>` + text.substring(idx+q.length);
+          node.parentNode.replaceChild(span, node);
+          hits.push(span.querySelector('mark.search-hit'));
+        }
+      }
+      if(found && hits.length){ hits[0].scrollIntoView({behavior:'smooth', block:'center'}); }
+      return found;
+    }
+
+    function doSearch(query){
+      query = (query||'').trim();
+      if(!query){ renderTOC(); clearHighlights(); return; }
+      // Try current chapter first
+      if(highlightInChapter(query)) return;
+      // Else find first chapter with match
+      const chapterData = state.lang === 'en' ? chaptersEN : chaptersSW;
+      const idx = chapterData.findIndex(ch => (ch.title + ' ' + (ch.body||'')).toLowerCase().includes(query.toLowerCase()));
+      if(idx>=0){ loadChapter(idx); setTimeout(()=> highlightInChapter(query), 50); }
+    }
+
+    //---------- UI Events ----------
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // Hydrate from hash
+      const hash = location.hash.replace('#','');
+      const chapterData = state.lang === 'en' ? chaptersEN : chaptersSW;
+      const idxFromHash = chapterData.findIndex(c=>c.id===hash);
+      if(idxFromHash>=0) state.chapterIndex = idxFromHash;
+
+      applyTheme(); applyFont(); applyTextScale(); setI18N();
+      renderTOC(); renderChapter();
+
+      // Prev/Next bottom
+      $('#prevBtn').addEventListener('click', ()=> loadChapter(state.chapterIndex-1));
+      $('#nextBtn').addEventListener('click', ()=> loadChapter(state.chapterIndex+1));
+
+      // TOC toggle on mobile
+      $('#tocToggle').addEventListener('click', ()=> $('#toc').classList.toggle('hidden'));
+
+      // Collapse/Expand all (stateful)
+      $('#collapseAll').addEventListener('click', ()=>{
+        state.collapsed = !state.collapsed; store.set('pm_collapsed', state.collapsed);
+        renderTOC(); setI18N();
+      });
+      state.collapsed = store.get('pm_collapsed', false);
+
+      // Theme cycle
+      $('#themeBtn').addEventListener('click', ()=>{ state.theme = state.theme==='light' ? 'sepia' : state.theme==='sepia' ? 'night' : 'light'; applyTheme(); store.set('pm_theme', state.theme); });
+
+      // Font menu
+      $$('.dropdown-item[data-font]').forEach(a=> a.addEventListener('click', ()=>{ state.font = a.getAttribute('data-font'); applyFont(); store.set('pm_font', state.font); }));
+
+      // Prevent dropdown from closing when changing size
+      $('#textSizer').addEventListener('click', (e)=> e.stopPropagation());
+      $('#incText').addEventListener('click', ()=>{ state.textScale = Math.min(1.6, +(state.textScale + 0.05).toFixed(2)); applyTextScale(); store.set('pm_textScale', state.textScale); });
+      $('#decText').addEventListener('click', ()=>{ state.textScale = Math.max(0.8, +(state.textScale - 0.05).toFixed(2)); applyTextScale(); store.set('pm_textScale', state.textScale); });
+
+      // Search behavior (real-time)
+      $('#searchInput').addEventListener('input', (e)=>{ doSearch(e.target.value); });
+
+      // Notes modal
+      $('#notesBtn').addEventListener('click', ()=>{ 
+        const ch = state.lang === 'en' ? chaptersEN[state.chapterIndex] : chaptersSW[state.chapterIndex];
+        const html = `${ch.quotes?.length? `<h6 class='mb-2'>${I18N[state.lang].quotes}</h6><ul>${ch.quotes.map(q=>`<li class='mb-2'>“${q}”</li>`).join('')}</ul>`:''}${ch.comments?.length? `<h6 class='mt-3 mb-2'>${I18N[state.lang].comments}</h6><ul>${ch.comments.map(c=>`<li class='mb-2'>${c}</li>`).join('')}</ul>`:''}${!ch.quotes?.length && !ch.comments?.length ? '<em>—</em>':''}`; 
+        $('#modalContent').innerHTML = html; 
+        const modal = new bootstrap.Modal($('#notesModal')); 
+        modal.show(); 
+      });
+
+      // Text-to-Speech events
+      $('#playAudio').addEventListener('click', startSpeaking);
+      $('#stopAudio').addEventListener('click', stopSpeaking);
+      
+      // Voice selection modal events
+      $$('.voice-select-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const voiceId = btn.getAttribute('data-voice-id');
+          // Close the modal
+          const modal = bootstrap.Modal.getInstance($('#voiceSelectionModal'));
+          if (modal) {
+            modal.hide();
+          }
+          // Speak with the selected voice
+          speakWithVoice(voiceId);
+        });
+      });
+
+      // Author contact popover
+      const pop = new bootstrap.Popover($('#authorBtn'), { html: true, trigger: 'click', placement: 'top', content: `
+        <div class='text-start'>
+          <div class='mb-2 fw-semibold'>Wasiliana nami</div>
+          <div class='d-grid gap-2'>
+            <a class='btn btn-primary' href='tel:+255711311363'><i class='bi bi-telephone'></i> Piga Simu</a>
+            <a class='btn btn-outline-primary' href='mailto:claytonecurth@gmail.com'><i class='bi bi-envelope'></i> Barua pepe</a>
+          </div>
+        </div>` });
+
+      // Language switching
+      $$('.lang-opt').forEach(a=> a.addEventListener('click', ()=>{ state.lang = a.dataset.lang; store.set('pm_lang', state.lang); setI18N(); renderTOC(); renderChapter(); }));
+    });
+
+  </script>
+</body>
+</html>
